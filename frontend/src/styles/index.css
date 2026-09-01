@@ -171,7 +171,44 @@
   border-color: #18181B !important;
 }
 
-/* 4. Toolbar & Secondary Buttons */
+/* 4. Modal Dialog Dark Mode Overrides */
+[data-theme="dark"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+[data-theme="dark"] .modal-content {
+  background: #121215 !important;
+  border-color: #27272A !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95) !important;
+}
+
+[data-theme="dark"] .modal-header h2 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="dark"] .form-group label {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="dark"] .form-control {
+  background: #000000 !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: #71717A !important;
+}
+
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+  cursor: pointer;
+}
+
+/* 5. Toolbar & Secondary Buttons */
 [data-theme="dark"] .toolbar-card {
   background: #121215 !important;
   border-color: #27272A !important;
@@ -208,7 +245,7 @@
   color: #FFFFFF !important;
 }
 
-/* 5. Category Chips */
+/* 6. Category Chips */
 [data-theme="dark"] .chip {
   background: #18181B !important;
   border-color: #3F3F46 !important;
@@ -220,7 +257,7 @@
   color: #FFFFFF !important;
 }
 
-/* 6. Task Cards High Contrast Dark Mode Overrides */
+/* 7. Task Cards High Contrast Dark Mode Overrides */
 [data-theme="dark"] .task-card {
   background: #121215 !important;
   border-color: #27272A !important;
@@ -312,7 +349,7 @@
   border-color: rgba(239, 68, 68, 0.5) !important;
 }
 
-/* 7. Right Sidebar Panel High Contrast */
+/* 8. Right Sidebar Panel High Contrast */
 [data-theme="dark"] .right-panel {
   background: #09090B !important;
   border-left-color: #27272A !important;

@@ -109,7 +109,7 @@ export function ListPage() {
 
       {/* 2. Main Center Content Pane */}
       <div className="main-content">
-        <Header currentPage="list" onOpenCreateModal={() => setIsModalOpen(true)} />
+        <Header currentPage="list" onOpenCreateModal={() => setIsModalOpen(true)} todos={todos} />
 
         {/* Welcome Hero Banner */}
         <div className="welcome-banner">

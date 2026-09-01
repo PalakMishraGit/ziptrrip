@@ -171,6 +171,90 @@
   border-color: #18181B !important;
 }
 
+/* Notifications Popover Dropdown */
+.notifications-dropdown {
+  position: absolute;
+  top: 125%;
+  right: 0;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .notifications-dropdown {
+  background: #121215 !important;
+  border-color: #27272A !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9) !important;
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
+}
+
+[data-theme="dark"] .dropdown-header {
+  background: #18181B !important;
+  border-bottom-color: #27272A !important;
+}
+
+.dropdown-body {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: var(--bg-input);
+}
+
+[data-theme="dark"] .notification-item:hover {
+  background: #27272A !important;
+}
+
+.notification-item .item-icon {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.notification-item .item-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .notification-item .item-title {
+  color: #FFFFFF !important;
+}
+
+.notification-item .item-time {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+[data-theme="dark"] .notification-item .item-time {
+  color: #A1A1AA !important;
+}
+
 /* 4. Modal Dialog Dark Mode Overrides */
 [data-theme="dark"] .modal-overlay {
   background: rgba(0, 0, 0, 0.8) !important;

@@ -55,7 +55,7 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Pure OLED Dark Black Theme Overrides with Maximum Contrast & Brightness */
+/* Pure OLED Dark Black Theme Overrides */
 [data-theme="dark"] {
   --bg-main: #000000;
   --bg-sidebar: #09090B;
@@ -97,7 +97,7 @@
   color: #A5B4FC !important;
 }
 [data-theme="dark"] .sidebar-section-title {
-  color: #A5B4FC !important; /* Vivid Ice Indigo */
+  color: #A5B4FC !important;
   font-weight: 800 !important;
 }
 [data-theme="dark"] .sidebar-nav-item {
@@ -115,6 +115,17 @@
   background: #27272A !important;
   color: #FFFFFF !important;
 }
+
+/* Productivity Widget in Dark Mode */
+[data-theme="dark"] .sidebar-widget {
+  background: #18181B !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .sidebar-widget span,
+[data-theme="dark"] .sidebar-widget div {
+  color: #FFFFFF !important;
+}
+
 [data-theme="dark"] .user-info .user-name {
   color: #FFFFFF !important;
 }
@@ -128,7 +139,7 @@
   border-color: #27272A !important;
 }
 [data-theme="dark"] .stat-info .stat-label {
-  color: #E2E8F0 !important; /* Ultra-bright slate */
+  color: #E2E8F0 !important;
   font-weight: 800 !important;
 }
 [data-theme="dark"] .stat-info .stat-value {
@@ -136,7 +147,7 @@
   font-weight: 900 !important;
 }
 
-/* 3. Top Navbar & Breadcrumbs High Contrast */
+/* 3. Top Navbar & Icon Buttons */
 [data-theme="dark"] .top-navbar {
   background: #121215 !important;
   border-color: #27272A !important;
@@ -147,11 +158,34 @@
 [data-theme="dark"] .breadcrumb-current {
   color: #FFFFFF !important;
 }
+[data-theme="dark"] .navbar-icon-btn {
+  background: #18181B !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .navbar-icon-btn:hover {
+  background: #27272A !important;
+  border-color: #6366F1 !important;
+}
+[data-theme="dark"] .notification-dot {
+  border-color: #18181B !important;
+}
 
-/* 4. Toolbar & Search Controls */
+/* 4. Toolbar & Secondary Buttons (Sort DESC/ASC Button) */
 [data-theme="dark"] .toolbar-card {
   background: #121215 !important;
   border-color: #27272A !important;
+}
+[data-theme="dark"] .btn-secondary {
+  background: #18181B !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+[data-theme="dark"] .btn-secondary:hover {
+  background: #27272A !important;
+  border-color: #6366F1 !important;
+  color: #FFFFFF !important;
 }
 [data-theme="dark"] .search-box input {
   background: #000000 !important;

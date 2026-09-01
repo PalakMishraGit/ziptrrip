@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Plus, ArrowLeft, Bell, Sun, Moon, Layers, AlertTriangle, AlertCircle, Clock, Check, X, Palette, Code, Sparkles, Snowflake, Monitor } from 'lucide-react';
+import { Search, Plus, ArrowLeft, Bell, Sun, Moon, Layers, AlertTriangle, AlertCircle, Clock, Check, X, Palette, Code, Sparkles, Snowflake, Monitor, Zap } from 'lucide-react';
 
 export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task Workspace', todos = [] }) {
   const [theme, setTheme] = useState(() => {

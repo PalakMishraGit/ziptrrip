@@ -120,7 +120,7 @@ export function WelcomeBanner({ onOpenCreateModal }) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+      <div className="banner-action-wrapper">
         <button className="btn btn-primary banner-action-btn" onClick={onOpenCreateModal}>
           <Plus size={18} /> Add New Task
         </button>

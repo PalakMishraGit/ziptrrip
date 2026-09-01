@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin, CheckCircle2 } from 'lucide-react';
+import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin } from 'lucide-react';
 
 export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned, onTogglePin }) {
   const [localPinned, setLocalPinned] = useState(false);
@@ -20,7 +20,7 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
 
       setTimeout(() => {
         setIsFlipping(false);
-      }, 1600); // flip back after celebration
+      }, 5000); // Hold celebration for full 5 seconds before flipping back
     } else {
       onToggleStatus(task.id);
     }
@@ -162,9 +162,9 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
           </div>
         </div>
 
-        {/* Back Face of Card - 3D Celebration Flip with Giant Tick & Confetti Burst */}
+        {/* Back Face of Card - 3D Celebration Flip with Full Green Cover & Bottom-to-Top Animated Tick */}
         <div className="task-card-back">
-          {/* Confetti Particles */}
+          {/* Confetti Explosion Particles */}
           <div className="confetti-burst">
             <span className="confetti-p p1"></span>
             <span className="confetti-p p2"></span>
@@ -181,8 +181,12 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
           </div>
 
           <div className="celebration-content">
-            <div className="celebration-tick-ring">
-              <CheckCircle2 size={64} color="#10B981" />
+            {/* SVG Checkmark stroke animated from bottom to top */}
+            <div className="celebration-tick-wrapper">
+              <svg className="animated-check-svg" viewBox="0 0 52 52">
+                <circle className="animated-check-circle" cx="26" cy="26" r="23" fill="none" />
+                <path className="animated-check-path" fill="none" d="M14 27 l7 7 l16 -16" />
+              </svg>
             </div>
             <h3 className="celebration-title">TASK COMPLETED!</h3>
             <p className="celebration-subtitle">Great job! Keep up the momentum 🎉</p>

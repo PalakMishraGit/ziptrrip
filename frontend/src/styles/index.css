@@ -1925,68 +1925,94 @@ button, input, select, textarea {
   transition: transform 0.1s ease;
 }
 
-/* 8. Highlighted Task Card 0%-100% Revolving Border Laser Progress + Card Shake */
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+/* 8. 0-100% Revolving Border Laser Progress Sweep + Card Shake Animation */
+.card-border-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: var(--radius-xl);
+  z-index: 10;
+  overflow: visible;
 }
 
-@keyframes rotateBorderSweep {
+.border-rect {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 3.5px;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100;
+  stroke-dashoffset: 0;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes borderSweepProgress {
   0% {
-    --border-angle: 0deg;
+    stroke-dashoffset: 0;
   }
   100% {
-    --border-angle: 360deg;
+    stroke-dashoffset: -100;
   }
 }
 
-@keyframes cardShakeWiggle {
+@keyframes cardShakeOnHover {
   0%, 72%, 100% {
-    transform: translateY(-5px) rotate(0deg);
+    transform: translateY(-6px) rotate(0deg);
   }
   75% {
-    transform: translateY(-5px) rotate(-3.5deg);
+    transform: translateY(-6px) rotate(-3.5deg);
   }
   79% {
-    transform: translateY(-5px) rotate(3.5deg);
+    transform: translateY(-6px) rotate(3.5deg);
   }
   83% {
-    transform: translateY(-5px) rotate(-2.5deg);
+    transform: translateY(-6px) rotate(-2.5deg);
   }
   87% {
-    transform: translateY(-5px) rotate(2.5deg);
+    transform: translateY(-6px) rotate(2.5deg);
   }
   91% {
-    transform: translateY(-5px) rotate(-1.5deg);
+    transform: translateY(-6px) rotate(-1.5deg);
   }
   95% {
-    transform: translateY(-5px) rotate(1.5deg);
+    transform: translateY(-6px) rotate(1.5deg);
   }
 }
 
-.task-card.highlighted-card {
-  position: relative;
-  border-color: transparent !important;
-  background-image: 
-    linear-gradient(var(--bg-card), var(--bg-card)), 
-    conic-gradient(from var(--border-angle), var(--accent-primary) 0deg, #8B5CF6 80deg, #EC4899 150deg, transparent 220deg, transparent 360deg);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  box-shadow: 0 14px 36px -6px rgba(79, 70, 229, 0.38), 0 0 20px rgba(99, 102, 241, 0.2);
-  animation: rotateBorderSweep 2.2s linear infinite, cardShakeWiggle 3.8s ease-in-out infinite;
-  z-index: 2;
+/* Hover or Highlighted State - Activates Laser Progress & Shake for ONLY the targeted card */
+.task-card:hover, .task-card.highlighted-card {
+  z-index: 15;
+  animation: cardShakeOnHover 3.2s ease-in-out infinite;
 }
 
-.task-card.highlighted-card::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: calc(var(--radius-xl) + 3px);
-  background: conic-gradient(from var(--border-angle), var(--accent-primary) 0deg, #8B5CF6 80deg, #EC4899 150deg, transparent 220deg, transparent 360deg);
-  z-index: -1;
-  animation: rotateBorderSweep 2.2s linear infinite;
-  opacity: 0.85;
-  filter: blur(6px);
-  pointer-events: none;
+.task-card:hover .border-rect, .task-card.highlighted-card .border-rect {
+  stroke-dasharray: 28 72;
+  animation: borderSweepProgress 1.7s linear infinite;
+}
+
+/* Priority-Specific Glowing Laser Color Sweeps */
+.task-card.prio-stripe-urgent:hover .border-rect, 
+.task-card.prio-stripe-urgent.highlighted-card .border-rect {
+  stroke: #EF4444;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.95));
+}
+
+.task-card.prio-stripe-high:hover .border-rect, 
+.task-card.prio-stripe-high.highlighted-card .border-rect {
+  stroke: #F59E0B;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.95));
+}
+
+.task-card.prio-stripe-medium:hover .border-rect, 
+.task-card.prio-stripe-medium.highlighted-card .border-rect {
+  stroke: #3B82F6;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.95));
+}
+
+.task-card.prio-stripe-low:hover .border-rect, 
+.task-card.prio-stripe-low.highlighted-card .border-rect {
+  stroke: #10B981;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.95));
 }

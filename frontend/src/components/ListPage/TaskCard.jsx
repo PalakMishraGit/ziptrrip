@@ -35,6 +35,20 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
 
   return (
     <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
+      {/* SVG Overlay for 0-100% Border Revolving Laser Progress Animation */}
+      <svg className="card-border-svg">
+        <rect 
+          x="2" 
+          y="2" 
+          width="calc(100% - 4px)" 
+          height="calc(100% - 4px)" 
+          rx="22" 
+          ry="22" 
+          pathLength="100" 
+          className="border-rect"
+        />
+      </svg>
+
       <div className="task-card-inner-top">
         <div className="task-header">
           <div className="task-header-left">

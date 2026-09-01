@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin } from 'lucide-react';
 
 export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned, onTogglePin }) {
   const [localPinned, setLocalPinned] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
-  const isPinned = propPinned !== undefined ? propPinned : localPinned;
+  const [localCompleted, setLocalCompleted] = useState(null);
 
-  const isCompleted = task.status === 'completed';
+  useEffect(() => {
+    setLocalCompleted(null);
+  }, [task.status]);
+
+  const isPinned = propPinned !== undefined ? propPinned : localPinned;
+  const isCompleted = localCompleted !== null ? localCompleted : (task.status === 'completed');
 
   const handleCheckboxClick = (e) => {
     e.stopPropagation();
-    if (!isCompleted) {
+    const nextCompleted = !isCompleted;
+    setLocalCompleted(nextCompleted);
+
+    if (nextCompleted) {
       // Trigger 3D Celebration Flip
       setIsFlipping(true);
 
-      setTimeout(() => {
-        onToggleStatus(task.id);
-      }, 400); // midway through 3D flip rotation
-
+      // Hold celebration on back face for full 5 seconds before flipping back
       setTimeout(() => {
         setIsFlipping(false);
-      }, 5000); // Hold celebration for full 5 seconds before flipping back
+        // Persist to parent/API after full 5-second celebration finishes
+        onToggleStatus(task.id);
+      }, 5000);
     } else {
       onToggleStatus(task.id);
     }

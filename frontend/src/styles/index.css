@@ -1038,14 +1038,17 @@ button, input, select, textarea {
 }
 
 .welcome-banner .btn-primary {
-  background: #FFFFFF;
-  color: var(--accent-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #FFFFFF !important;
+  color: #312E81 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
   white-space: nowrap;
 }
 
 .welcome-banner .btn-primary:hover {
-  background: #F8FAFC;
+  background: #F1F5F9 !important;
+  color: #1E1B4B !important;
+  transform: translateY(-2px);
 }
 
 /* Buttons */
@@ -1054,7 +1057,7 @@ button, input, select, textarea {
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.875rem;
   border-radius: var(--radius-md);
   border: none;
@@ -1064,7 +1067,7 @@ button, input, select, textarea {
 
 .btn-primary {
   background: var(--accent-gradient);
-  color: #FFFFFF !important;
+  color: #FFFFFF;
   box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28);
 }
 

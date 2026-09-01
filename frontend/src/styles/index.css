@@ -55,6 +55,146 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* Dynamic Motion Design & Micro-Animations Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dropdownSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes notificationPing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Staggered Load Entrance Animations */
+.welcome-banner {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stat-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stats-grid .stat-card:nth-child(1) { animation-delay: 0.05s; }
+.stats-grid .stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stats-grid .stat-card:nth-child(3) { animation-delay: 0.15s; }
+.stats-grid .stat-card:nth-child(4) { animation-delay: 0.2s; }
+
+.toolbar-card {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.category-chips {
+  animation: fadeInUp 0.52s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.task-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.task-grid .task-card:nth-child(1) { animation-delay: 0.05s; }
+.task-grid .task-card:nth-child(2) { animation-delay: 0.1s; }
+.task-grid .task-card:nth-child(3) { animation-delay: 0.15s; }
+.task-grid .task-card:nth-child(4) { animation-delay: 0.2s; }
+.task-grid .task-card:nth-child(5) { animation-delay: 0.25s; }
+.task-grid .task-card:nth-child(6) { animation-delay: 0.3s; }
+
+.notifications-dropdown {
+  animation: dropdownSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.task-picker-popover {
+  animation: dropdownSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-content {
+  animation: modalZoomIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.notification-dot {
+  animation: notificationPing 2s infinite;
+}
+
+/* Micro-Interaction Hover Transitions */
+.stat-card:hover .stat-icon {
+  transform: scale(1.12) rotate(6deg);
+  transition: transform 0.25s ease;
+}
+
+.stat-icon {
+  transition: transform 0.25s ease;
+}
+
+.navbar-icon-btn svg {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navbar-icon-btn:hover svg {
+  transform: rotate(25deg) scale(1.12);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-100%);
+}
+
+.btn-primary:hover::after {
+  animation: shimmer 0.85s ease-in-out;
+}
+
 /* Pure OLED Dark Black Theme Overrides */
 [data-theme="dark"] {
   --bg-main: #000000;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, CheckCircle2, Circle, ExternalLink, Trash2, ListChecks } from 'lucide-react';
+import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock } from 'lucide-react';
 
 export function TaskCard({ task, onToggleStatus, onDelete }) {
   const isCompleted = task.status === 'completed';
@@ -22,35 +22,41 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && !isCompleted;
 
   return (
-    <div className={`task-card ${isCompleted ? 'completed' : ''}`}>
+    <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''}`}>
       <div>
         <div className="task-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
             <input 
               type="checkbox" 
               className="custom-checkbox" 
               checked={isCompleted}
               onChange={() => onToggleStatus(task.id)}
+              title={isCompleted ? 'Mark as pending' : 'Mark as completed'}
             />
             <span className={`prio-badge ${priorityClass}`}>
               {task.priority}
             </span>
+            {task.category && (
+              <span className="task-cat-badge">
+                <Tag size={10} style={{ marginRight: '3px' }} />
+                {task.category}
+              </span>
+            )}
           </div>
 
           <button 
-            className="btn btn-secondary" 
-            style={{ padding: '0.35rem 0.6rem', color: '#EF4444' }}
+            className="btn btn-icon-danger" 
             onClick={(e) => {
               e.stopPropagation();
               onDelete(task.id);
             }}
             title="Delete task"
           >
-            <Trash2 size={14} />
+            <Trash2 size={15} />
           </button>
         </div>
 
-        <a href={`todo.html?id=${task.id}`} className="task-title" style={{ display: 'block', marginTop: '0.5rem' }}>
+        <a href={`todo.html?id=${task.id}`} className="task-title" style={{ display: 'block', marginTop: '0.4rem' }}>
           {task.title}
         </a>
 
@@ -61,9 +67,12 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
 
       <div>
         {task.totalSubtasks > 0 && (
-          <div style={{ marginTop: '0.75rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-              <span><ListChecks size={12} style={{ display: 'inline', marginRight: '4px' }}/> {task.completedSubtasks}/{task.totalSubtasks} Subtasks</span>
+          <div style={{ marginTop: '0.85rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.775rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ListChecks size={13} color="var(--accent-primary)" /> 
+                {task.completedSubtasks}/{task.totalSubtasks} Subtasks
+              </span>
               <span>{subtaskProgress}%</span>
             </div>
             <div className="progress-bar-container">
@@ -73,12 +82,12 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
         )}
 
         <div className="task-footer">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isOverdue ? '#EF4444' : 'var(--text-muted)' }}>
-            <Calendar size={13} />
+          <div className={`due-badge ${isOverdue ? 'overdue' : ''}`}>
+            <Clock size={12} />
             <span>{formattedDueDate} {isOverdue && '(Overdue)'}</span>
           </div>
 
-          <a href={`todo.html?id=${task.id}`} className="btn btn-secondary" style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}>
+          <a href={`todo.html?id=${task.id}`} className="btn btn-outline-sm">
             View Details <ExternalLink size={12} />
           </a>
         </div>

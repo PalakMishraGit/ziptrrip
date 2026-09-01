@@ -7,7 +7,18 @@ export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task 
   });
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [hasUnread, setHasUnread] = useState(true);
+  const [readIds, setReadIds] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('read_notification_ids') || '[]');
+    } catch {
+      return [];
+    }
+  });
+
+  const [isAllRead, setIsAllRead] = useState(() => {
+    return localStorage.getItem('notifications_marked_read') === 'true';
+  });
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -53,7 +64,31 @@ export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task 
     }));
 
   const notifications = [...overdueAlerts, ...urgentAlerts].slice(0, 5);
-  const unreadCount = hasUnread ? notifications.length : 0;
+
+  // Compute unread count based on stored read IDs & global allRead status
+  const unreadNotifications = isAllRead
+    ? []
+    : notifications.filter(n => !readIds.includes(n.id));
+
+  const unreadCount = unreadNotifications.length;
+
+  const handleMarkAllRead = () => {
+    const allIds = notifications.map(n => n.id);
+    const updated = Array.from(new Set([...readIds, ...allIds]));
+    setReadIds(updated);
+    setIsAllRead(true);
+    localStorage.setItem('read_notification_ids', JSON.stringify(updated));
+    localStorage.setItem('notifications_marked_read', 'true');
+  };
+
+  const handleItemClick = (id) => {
+    if (!readIds.includes(id)) {
+      const updated = [...readIds, id];
+      setReadIds(updated);
+      localStorage.setItem('read_notification_ids', JSON.stringify(updated));
+    }
+    setIsNotificationsOpen(false);
+  };
 
   return (
     <header className="top-navbar">
@@ -116,10 +151,10 @@ export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task 
               {unreadCount > 0 && (
                 <button 
                   className="btn-link" 
-                  onClick={() => setHasUnread(false)}
+                  onClick={handleMarkAllRead}
                   style={{ fontSize: '0.75rem', color: 'var(--accent-primary)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}
                 >
-                  Mark read
+                  Mark all read
                 </button>
               )}
             </div>
@@ -130,26 +165,37 @@ export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task 
                   🎉 No overdue or urgent alerts!
                 </div>
               ) : (
-                notifications.map(item => (
-                  <a 
-                    key={item.id} 
-                    href={`todo.html?id=${item.taskId}`} 
-                    className="notification-item"
-                    onClick={() => setIsNotificationsOpen(false)}
-                  >
-                    <div className="item-icon">
-                      {item.type === 'overdue' ? (
-                        <AlertTriangle size={15} color="#EF4444" />
-                      ) : (
-                        <AlertCircle size={15} color="#F59E0B" />
+                notifications.map(item => {
+                  const isRead = isAllRead || readIds.includes(item.id);
+                  return (
+                    <a 
+                      key={item.id} 
+                      href={`todo.html?id=${item.taskId}`} 
+                      className={`notification-item ${isRead ? 'read' : 'unread'}`}
+                      onClick={() => handleItemClick(item.id)}
+                      style={{ opacity: isRead ? 0.6 : 1 }}
+                    >
+                      <div className="item-icon">
+                        {item.type === 'overdue' ? (
+                          <AlertTriangle size={15} color="#EF4444" />
+                        ) : (
+                          <AlertCircle size={15} color="#F59E0B" />
+                        )}
+                      </div>
+                      <div className="item-content" style={{ flex: 1 }}>
+                        <div className="item-title" style={{ fontWeight: isRead ? 500 : 800 }}>
+                          {item.title}
+                        </div>
+                        <div className="item-time">{item.time}</div>
+                      </div>
+                      {isRead && (
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                          <Check size={12} color="#10B981" /> Read
+                        </span>
                       )}
-                    </div>
-                    <div className="item-content">
-                      <div className="item-title">{item.title}</div>
-                      <div className="item-time">{item.time}</div>
-                    </div>
-                  </a>
-                ))
+                    </a>
+                  );
+                })
               )}
             </div>
           </div>

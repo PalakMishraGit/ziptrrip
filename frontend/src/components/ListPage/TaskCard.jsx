@@ -1,11 +1,30 @@
 import React, { useState } from 'react';
-import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin } from 'lucide-react';
+import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin, CheckCircle2 } from 'lucide-react';
 
 export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned, onTogglePin }) {
   const [localPinned, setLocalPinned] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
   const isPinned = propPinned !== undefined ? propPinned : localPinned;
 
   const isCompleted = task.status === 'completed';
+
+  const handleCheckboxClick = (e) => {
+    e.stopPropagation();
+    if (!isCompleted) {
+      // Trigger 3D Celebration Flip
+      setIsFlipping(true);
+
+      setTimeout(() => {
+        onToggleStatus(task.id);
+      }, 400); // midway through 3D flip rotation
+
+      setTimeout(() => {
+        setIsFlipping(false);
+      }, 1600); // flip back after celebration
+    } else {
+      onToggleStatus(task.id);
+    }
+  };
 
   const priorityClass = {
     low: 'prio-low',
@@ -34,108 +53,140 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
   };
 
   return (
-    <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
-      {/* SVG Overlay for 0-100% Border Revolving Laser Progress Animation */}
-      <svg className="card-border-svg">
-        <rect 
-          x="2" 
-          y="2" 
-          width="calc(100% - 4px)" 
-          height="calc(100% - 4px)" 
-          rx="22" 
-          ry="22" 
-          pathLength="100" 
-          className="border-rect"
-        />
-      </svg>
-
-      <div className="task-card-inner-top">
-        <div className="task-header">
-          <div className="task-header-left">
-            <input 
-              type="checkbox" 
-              className="custom-checkbox" 
-              checked={isCompleted}
-              onChange={() => onToggleStatus(task.id)}
-              title={isCompleted ? 'Mark as pending' : 'Mark as completed'}
+    <div className={`task-card-3d-wrapper ${isFlipping ? 'is-flipped' : ''}`}>
+      <div className="task-card-3d-inner">
+        {/* Front Face of Task Card */}
+        <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
+          {/* SVG Overlay for 0-100% Border Revolving Laser Progress Animation */}
+          <svg className="card-border-svg">
+            <rect 
+              x="2" 
+              y="2" 
+              width="calc(100% - 4px)" 
+              height="calc(100% - 4px)" 
+              rx="22" 
+              ry="22" 
+              pathLength="100" 
+              className="border-rect"
             />
-            <span className={`prio-badge ${priorityClass}`}>
-              {task.priority === 'urgent' && <AlertCircle size={10} style={{ marginRight: '3px' }} />}
-              {task.priority}
-            </span>
-            {task.category && (
-              <span className="task-cat-badge">
-                <Tag size={10} style={{ marginRight: '3px' }} />
-                {task.category}
-              </span>
+          </svg>
+
+          <div className="task-card-inner-top">
+            <div className="task-header">
+              <div className="task-header-left">
+                <input 
+                  type="checkbox" 
+                  className="custom-checkbox" 
+                  checked={isCompleted}
+                  onChange={handleCheckboxClick}
+                  title={isCompleted ? 'Mark as pending' : 'Mark as completed with 3D flip & confetti'}
+                />
+                <span className={`prio-badge ${priorityClass}`}>
+                  {task.priority === 'urgent' && <AlertCircle size={10} style={{ marginRight: '3px' }} />}
+                  {task.priority}
+                </span>
+                {task.category && (
+                  <span className="task-cat-badge">
+                    <Tag size={10} style={{ marginRight: '3px' }} />
+                    {task.category}
+                  </span>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <button 
+                  className={`btn btn-icon-secondary ${isPinned ? 'pinned-active' : ''}`}
+                  onClick={handlePinClick}
+                  title={isPinned ? 'Unpin/Unhighlight task' : 'Pin/Highlight task with revolving border & shake'}
+                  style={{
+                    background: isPinned ? 'rgba(79, 70, 229, 0.15)' : 'transparent',
+                    color: isPinned ? 'var(--accent-primary)' : 'var(--text-muted)',
+                    border: 'none',
+                    padding: '0.35rem',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Pin size={15} style={{ transform: isPinned ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease' }} />
+                </button>
+
+                <button 
+                  className="btn btn-icon-danger" 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(task.id);
+                  }}
+                  title="Delete task"
+                >
+                  <Trash2 size={15} />
+                </button>
+              </div>
+            </div>
+
+            <a href={`todo.html?id=${task.id}`} className="task-title">
+              {task.title}
+            </a>
+
+            {task.description && (
+              <p className="task-desc">{task.description}</p>
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-            <button 
-              className={`btn btn-icon-secondary ${isPinned ? 'pinned-active' : ''}`}
-              onClick={handlePinClick}
-              title={isPinned ? 'Unpin/Unhighlight task' : 'Pin/Highlight task with revolving border & shake'}
-              style={{
-                background: isPinned ? 'rgba(79, 70, 229, 0.15)' : 'transparent',
-                color: isPinned ? 'var(--accent-primary)' : 'var(--text-muted)',
-                border: 'none',
-                padding: '0.35rem',
-                borderRadius: 'var(--radius-sm)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <Pin size={15} style={{ transform: isPinned ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease' }} />
-            </button>
+          <div className="task-card-inner-bottom">
+            {task.totalSubtasks > 0 && (
+              <div className="task-subtask-wrapper">
+                <div className="subtask-header-info">
+                  <span className="subtask-label">
+                    <ListChecks size={13} className="subtask-icon" /> 
+                    {task.completedSubtasks}/{task.totalSubtasks} Subtasks
+                  </span>
+                  <span className="subtask-percent">{subtaskProgress}%</span>
+                </div>
+                <div className="progress-bar-container">
+                  <div className="progress-bar-fill" style={{ width: `${subtaskProgress}%` }}></div>
+                </div>
+              </div>
+            )}
 
-            <button 
-              className="btn btn-icon-danger" 
-              onClick={(e) => {
-                e.stopPropagation();
-                onDelete(task.id);
-              }}
-              title="Delete task"
-            >
-              <Trash2 size={15} />
-            </button>
+            <div className="task-footer">
+              <div className={`due-badge ${isOverdue ? 'overdue' : ''}`}>
+                <Clock size={12} />
+                <span>{formattedDueDate} {isOverdue && '(Overdue)'}</span>
+              </div>
+
+              <a href={`todo.html?id=${task.id}`} className="btn btn-outline-sm btn-details-link">
+                View Details <ArrowRight size={13} className="details-arrow" />
+              </a>
+            </div>
           </div>
         </div>
 
-        <a href={`todo.html?id=${task.id}`} className="task-title">
-          {task.title}
-        </a>
-
-        {task.description && (
-          <p className="task-desc">{task.description}</p>
-        )}
-      </div>
-
-      <div className="task-card-inner-bottom">
-        {task.totalSubtasks > 0 && (
-          <div className="task-subtask-wrapper">
-            <div className="subtask-header-info">
-              <span className="subtask-label">
-                <ListChecks size={13} className="subtask-icon" /> 
-                {task.completedSubtasks}/{task.totalSubtasks} Subtasks
-              </span>
-              <span className="subtask-percent">{subtaskProgress}%</span>
-            </div>
-            <div className="progress-bar-container">
-              <div className="progress-bar-fill" style={{ width: `${subtaskProgress}%` }}></div>
-            </div>
-          </div>
-        )}
-
-        <div className="task-footer">
-          <div className={`due-badge ${isOverdue ? 'overdue' : ''}`}>
-            <Clock size={12} />
-            <span>{formattedDueDate} {isOverdue && '(Overdue)'}</span>
+        {/* Back Face of Card - 3D Celebration Flip with Giant Tick & Confetti Burst */}
+        <div className="task-card-back">
+          {/* Confetti Particles */}
+          <div className="confetti-burst">
+            <span className="confetti-p p1"></span>
+            <span className="confetti-p p2"></span>
+            <span className="confetti-p p3"></span>
+            <span className="confetti-p p4"></span>
+            <span className="confetti-p p5"></span>
+            <span className="confetti-p p6"></span>
+            <span className="confetti-p p7"></span>
+            <span className="confetti-p p8"></span>
+            <span className="confetti-p p9"></span>
+            <span className="confetti-p p10"></span>
+            <span className="confetti-p p11"></span>
+            <span className="confetti-p p12"></span>
           </div>
 
-          <a href={`todo.html?id=${task.id}`} className="btn btn-outline-sm btn-details-link">
-            View Details <ArrowRight size={13} className="details-arrow" />
-          </a>
+          <div className="celebration-content">
+            <div className="celebration-tick-ring">
+              <CheckCircle2 size={64} color="#10B981" />
+            </div>
+            <h3 className="celebration-title">TASK COMPLETED!</h3>
+            <p className="celebration-subtitle">Great job! Keep up the momentum 🎉</p>
+          </div>
         </div>
       </div>
     </div>

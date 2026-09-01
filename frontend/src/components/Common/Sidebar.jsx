@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   CheckSquare, LayoutDashboard, Clock, AlertTriangle, CheckCircle2, 
-  Tag, Folder, TrendingUp, Plus, Sparkles, User
+  Tag, Folder, TrendingUp, User
 } from 'lucide-react';
 
 export function Sidebar({ 
@@ -10,8 +10,7 @@ export function Sidebar({
   categories = [], 
   selectedCategory, 
   onSelectCategory,
-  stats = { total: 0, completed: 0, pending: 0, completionRate: 0 },
-  onOpenCreateModal 
+  stats = { total: 0, completed: 0, pending: 0, completionRate: 0 }
 }) {
   return (
     <aside className="app-sidebar">
@@ -24,13 +23,6 @@ export function Sidebar({
           <h2>TaskSphere</h2>
           <span>Enterprise Hub</span>
         </div>
-      </div>
-
-      {/* Quick Action Button */}
-      <div style={{ padding: '0 1rem', marginBottom: '1.5rem' }}>
-        <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={onOpenCreateModal}>
-          <Plus size={18} /> New Task
-        </button>
       </div>
 
       {/* Main Navigation Views */}
@@ -117,11 +109,13 @@ export function Sidebar({
       {/* User Profile Footer */}
       <div className="sidebar-user-footer">
         <div className="user-avatar">
-          <User size={18} color="#4F46E5" />
+          <User size={18} color="var(--accent-primary)" />
         </div>
         <div className="user-info">
           <div className="user-name">Workspace Member</div>
-          <div className="user-role">Lead Developer</div>
+          <div className="user-role" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }}></span> Lead Developer
+          </div>
         </div>
       </div>
     </aside>

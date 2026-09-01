@@ -120,11 +120,9 @@ export function Header({ currentPage = 'list', onOpenCreateModal, title = 'Task 
       </div>
 
       <div className="navbar-right" style={{ position: 'relative' }}>
-        {currentPage === 'list' && (
-          <button className="btn btn-primary" onClick={onOpenCreateModal}>
-            <Plus size={18} /> Add Task
-          </button>
-        )}
+        <span className="navbar-status-chip" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: 700, padding: '0.35rem 0.75rem', borderRadius: '20px', background: 'var(--bg-input)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
+          <Zap size={13} color="var(--accent-primary)" /> Enterprise Workspace
+        </span>
 
         {/* Theme Palette Icon Button & Popover */}
         <div style={{ position: 'relative' }} ref={themeRef}>

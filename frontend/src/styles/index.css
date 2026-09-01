@@ -1822,3 +1822,105 @@ button, input, select, textarea {
   margin-bottom: 1rem;
   opacity: 0.5;
 }
+
+/* ==========================================================================
+   ADVANCED MOTION DESIGN & DYNAMIC MICRO-ANIMATION SUITE
+   ========================================================================== */
+
+/* 1. Staggered Card Entrance & Elastic Hover Lift */
+@keyframes fadeInUpStagger {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.task-card {
+  animation: fadeInUpStagger 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.task-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.18), 0 0 1px var(--border-accent);
+}
+
+/* 2. Shimmer Sweep Effect for Welcome Banner */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  50% { transform: translateX(200%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.welcome-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: shimmerSweep 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* 3. Glowing Ambient Pulse for Stat Cards */
+@keyframes statGlow {
+  0%, 100% { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+  50% { box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.22); }
+}
+
+.stat-card {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-card:hover {
+  animation: statGlow 2.5s infinite ease-in-out;
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* 4. Icon Wiggle & Micro-Interactions */
+.navbar-icon-btn:hover svg {
+  animation: iconWiggle 0.5s ease-in-out;
+}
+
+@keyframes iconWiggle {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-15deg) scale(1.12); }
+  50% { transform: rotate(15deg) scale(1.12); }
+  75% { transform: rotate(-8deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.sidebar-nav-item svg {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sidebar-nav-item:hover svg {
+  transform: translateX(3px) scale(1.12);
+}
+
+/* 5. Breathing Badge Pulse for Urgent/High Priority */
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+
+.prio-badge.prio-urgent, .nav-count-badge.urgent {
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+/* 6. Fluid Progress Bar Fill Animation */
+.progress-bar-fill {
+  transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 7. Interactive Button & Control Press Feedback */
+.btn:active, .navbar-icon-btn:active, .chip:active {
+  transform: scale(0.93) !important;
+  transition: transform 0.1s ease;
+}

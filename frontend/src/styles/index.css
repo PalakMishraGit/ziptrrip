@@ -550,10 +550,10 @@ button, input, select, textarea {
 
 /* 3. Right Sidebar Panel */
 .right-panel {
-  width: 300px;
+  width: 320px;
   background: var(--bg-sidebar);
   border-left: 1px solid var(--border-color);
-  padding: 1.5rem;
+  padding: 1.25rem 1rem;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -561,7 +561,7 @@ button, input, select, textarea {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
   transition: background 0.3s ease;
 }
 
@@ -569,7 +569,7 @@ button, input, select, textarea {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 1.15rem;
+  padding: 1rem 0.9rem;
 }
 
 .widget-header {
@@ -580,7 +580,7 @@ button, input, select, textarea {
 }
 
 .widget-header h3 {
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   font-weight: 800;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -597,6 +597,8 @@ button, input, select, textarea {
   border-radius: var(--radius-md);
   margin-bottom: 0.5rem;
   transition: all 0.2s ease;
+  min-width: 0;
+  gap: 0.5rem;
 }
 
 .upcoming-item:hover {
@@ -605,22 +607,23 @@ button, input, select, textarea {
 }
 
 .upcoming-title {
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 190px;
+  max-width: 100%;
 }
 
 .upcoming-date {
   font-size: 0.725rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 .activity-feed-item {

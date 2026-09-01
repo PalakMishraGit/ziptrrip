@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, RotateCcw, Target, Sparkles, ChevronDown, Check, X, Tag } from 'lucide-react';
+import { Play, Pause, RotateCcw, Target, Sparkles, ChevronDown, Check, X } from 'lucide-react';
 
 export function FocusModeWidget({ todos = [] }) {
   const [mode, setMode] = useState('focus'); // 'focus' (25m), 'short' (5m), 'long' (15m)
@@ -73,34 +73,34 @@ export function FocusModeWidget({ todos = [] }) {
         </div>
         {isRunning && (
           <span className="prio-badge prio-urgent" style={{ fontSize: '0.625rem', padding: '0.15rem 0.45rem' }}>
-            🔥 Focus Active
+            🔥 Active
           </span>
         )}
       </div>
 
       <div className="focus-body">
-        {/* Compact Mode Selector Tabs (No text overflow) */}
+        {/* Compact & Clean Mode Selector Tabs */}
         <div className="focus-mode-tabs">
           <button 
             className={`focus-tab ${mode === 'focus' ? 'active' : ''}`}
             onClick={() => handleModeChange('focus')}
             title="Focus Session (25m)"
           >
-            Focus (25m)
+            25m Focus
           </button>
           <button 
             className={`focus-tab ${mode === 'short' ? 'active' : ''}`}
             onClick={() => handleModeChange('short')}
             title="Short Break (5m)"
           >
-            Short (5m)
+            5m Short
           </button>
           <button 
             className={`focus-tab ${mode === 'long' ? 'active' : ''}`}
             onClick={() => handleModeChange('long')}
             title="Long Break (15m)"
           >
-            Long (15m)
+            15m Long
           </button>
         </div>
 
@@ -131,49 +131,45 @@ export function FocusModeWidget({ todos = [] }) {
               {selectedTask ? (
                 <div 
                   onClick={(e) => { e.stopPropagation(); setSelectedTaskId(''); }}
-                  style={{ display: 'flex', alignItems: 'center', opacity: 0.7, padding: '2px' }}
+                  style={{ display: 'flex', alignItems: 'center', opacity: 0.8, padding: '2px' }}
                   title="Unpin Task"
                 >
                   <X size={14} />
                 </div>
               ) : (
-                <ChevronDown size={14} style={{ opacity: 0.7, transform: isPickerOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                <ChevronDown size={14} style={{ opacity: 0.7, transform: isPickerOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
               )}
             </button>
 
-            {/* Custom Modern Floating Task Picker Popover */}
+            {/* Task Picker Dropdown Popover */}
             {isPickerOpen && (
               <div className="task-picker-popover">
                 <div className="picker-header">
                   <span>Select Active Task</span>
-                  <button onClick={() => setIsPickerOpen(false)} className="btn-close-picker">
-                    <X size={12} />
+                  <button className="btn-close-picker" onClick={() => setIsPickerOpen(false)}>
+                    <X size={13} />
                   </button>
                 </div>
+
                 <div className="picker-list">
-                  {activeTodos.length === 0 ? (
-                    <div className="picker-empty">No active tasks available</div>
-                  ) : (
+                  {activeTodos.length > 0 ? (
                     activeTodos.map(task => (
                       <div 
                         key={task.id}
-                        className={`picker-item ${String(selectedTaskId) === String(task.id) ? 'active' : ''}`}
+                        className={`picker-item ${String(task.id) === String(selectedTaskId) ? 'active' : ''}`}
                         onClick={() => {
                           setSelectedTaskId(task.id);
                           setIsPickerOpen(false);
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: 0 }}>
-                          <span className={`prio-badge prio-${task.priority}`} style={{ fontSize: '0.6rem', padding: '0.1rem 0.35rem' }}>
-                            {task.priority}
-                          </span>
-                          <span className="picker-item-title">{task.title}</span>
-                        </div>
-                        {String(selectedTaskId) === String(task.id) && (
-                          <Check size={14} color="var(--accent-primary)" />
+                        <span className="picker-item-title">{task.title}</span>
+                        {String(task.id) === String(selectedTaskId) && (
+                          <Check size={13} color="var(--accent-primary)" />
                         )}
                       </div>
                     ))
+                  ) : (
+                    <div className="picker-empty">No active tasks available</div>
                   )}
                 </div>
               </div>
@@ -181,24 +177,24 @@ export function FocusModeWidget({ todos = [] }) {
           </div>
         )}
 
-        {/* Action Button Controls */}
+        {/* Timer Control Action Buttons */}
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button 
-            className={`btn ${isRunning ? 'btn-secondary' : 'btn-primary'}`} 
-            style={{ flex: 1, justifyContent: 'center', padding: '0.55rem 0.85rem', fontSize: '0.8rem' }}
-            onClick={() => setIsRunning(!isRunning)}
+            className={`btn ${isRunning ? 'btn-secondary' : 'btn-primary'}`}
+            style={{ flex: 1, justifyContent: 'center', padding: '0.55rem', fontSize: '0.825rem' }}
+            onClick={() => setIsRunning(prev => !prev)}
           >
-            {isRunning ? <Pause size={15} /> : <Play size={15} />}
-            {isRunning ? 'Pause' : 'Start Focus'}
+            {isRunning ? <Pause size={16} /> : <Play size={16} />}
+            <span>{isRunning ? 'Pause Focus' : 'Start Focus'}</span>
           </button>
 
           <button 
-            className="btn btn-secondary" 
-            style={{ padding: '0.55rem', borderRadius: 'var(--radius-md)' }}
+            className="btn btn-secondary"
+            style={{ padding: '0.55rem', justifyContent: 'center' }}
             onClick={handleReset}
             title="Reset Timer"
           >
-            <RotateCcw size={15} />
+            <RotateCcw size={16} />
           </button>
         </div>
       </div>

@@ -41,10 +41,10 @@ export function RightPanel({ todos = [], stats = { categories: [] } }) {
               return (
                 <div key={cat} style={{ marginBottom: '0.85rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.25rem' }}>
-                    <span style={{ color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Tag size={12} color="var(--text-muted)" /> {cat}
+                    <span style={{ color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '4px', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <Tag size={12} color="var(--text-muted)" style={{ flexShrink: 0 }} /> {cat}
                     </span>
-                    <span style={{ color: 'var(--text-muted)' }}>{completed}/{total} ({pct}%)</span>
+                    <span style={{ color: 'var(--text-secondary)', fontWeight: 700, flexShrink: 0, marginLeft: '0.5rem' }}>{completed}/{total} ({pct}%)</span>
                   </div>
                   <div className="progress-bar-container" style={{ height: '6px' }}>
                     <div className="progress-bar-fill" style={{ width: `${pct}%` }}></div>
@@ -68,13 +68,13 @@ export function RightPanel({ todos = [], stats = { categories: [] } }) {
           {upcomingTasks.length > 0 ? (
             upcomingTasks.map(t => (
               <a href={`todo.html?id=${t.id}`} key={t.id} className="upcoming-item">
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div className="upcoming-title">{t.title}</div>
                   <div className="upcoming-date">
-                    <Clock size={12} /> {t.effectiveDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                    <Clock size={12} style={{ flexShrink: 0 }} /> {t.effectiveDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                   </div>
                 </div>
-                <ArrowUpRight size={14} color="var(--text-muted)" />
+                <ArrowUpRight size={14} color="var(--text-muted)" style={{ flexShrink: 0, marginLeft: '0.4rem' }} />
               </a>
             ))
           ) : (
@@ -103,7 +103,7 @@ export function RightPanel({ todos = [], stats = { categories: [] } }) {
               </div>
             ))
           ) : (
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No recent activity recorded.</p>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No recent activity logged.</p>
           )}
         </div>
       </div>

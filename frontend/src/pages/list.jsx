@@ -4,6 +4,7 @@ import { Header } from '../components/Common/Header.jsx';
 import { TaskCard } from '../components/ListPage/TaskCard.jsx';
 import { QuickAddModal } from '../components/ListPage/QuickAddModal.jsx';
 import { RightPanel } from '../components/ListPage/RightPanel.jsx';
+import { WelcomeBanner } from '../components/ListPage/WelcomeBanner.jsx';
 import { TodoApi } from '../api/todoApi.js';
 import { 
   Search, ListTodo, Clock, CheckCircle2, AlertTriangle, 
@@ -111,16 +112,8 @@ export function ListPage() {
       <div className="main-content">
         <Header currentPage="list" onOpenCreateModal={() => setIsModalOpen(true)} todos={todos} />
 
-        {/* Welcome Hero Banner */}
-        <div className="welcome-banner">
-          <div>
-            <h2>Task Management Dashboard</h2>
-            <p>Organize, track, and complete your multi-page application tasks seamlessly.</p>
-          </div>
-          <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
-            <Plus size={18} /> Add New Task
-          </button>
-        </div>
+        {/* Dynamic Greeting & Rotating Motivational Quotes Banner */}
+        <WelcomeBanner onOpenCreateModal={() => setIsModalOpen(true)} />
 
         {/* Metrics Overview Grid */}
         <div className="stats-grid">

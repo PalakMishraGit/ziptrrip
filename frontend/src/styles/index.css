@@ -255,6 +255,126 @@
   color: #A1A1AA !important;
 }
 
+/* Quote Banner Container */
+.quote-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  transition: opacity 0.3s ease;
+}
+
+.quote-container.fade-in {
+  opacity: 1;
+}
+
+.quote-container.fade-out {
+  opacity: 0.15;
+}
+
+.quote-text {
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quote-author {
+  font-style: normal;
+  font-weight: 700;
+  margin-left: 0.35rem;
+  opacity: 0.9;
+}
+
+.quote-refresh-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quote-refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(180deg);
+}
+
+/* Focus Session Pomodoro Widget */
+.focus-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+[data-theme="dark"] .focus-widget {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+
+.focus-mode-tabs {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--bg-input);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .focus-mode-tabs {
+  background: #000000 !important;
+}
+
+.focus-tab {
+  flex: 1;
+  padding: 0.35rem 0.25rem;
+  font-size: 0.725rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.focus-tab.active {
+  background: var(--bg-card);
+  color: var(--accent-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .focus-tab.active {
+  background: #27272A !important;
+  color: #FFFFFF !important;
+}
+
+.focus-timer-display {
+  text-align: center;
+  margin: 0.75rem 0;
+}
+
+.timer-text {
+  font-family: var(--font-mono);
+  font-size: 2.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .timer-text {
+  color: #FFFFFF !important;
+}
+
 /* 4. Modal Dialog Dark Mode Overrides */
 [data-theme="dark"] .modal-overlay {
   background: rgba(0, 0, 0, 0.8) !important;

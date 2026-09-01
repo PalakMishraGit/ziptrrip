@@ -1,5 +1,6 @@
 import React from 'react';
 import { Clock, History, PieChart, ArrowUpRight, CheckCircle2, Calendar, Tag } from 'lucide-react';
+import { FocusModeWidget } from './FocusModeWidget.jsx';
 
 export function RightPanel({ todos = [], stats = { categories: [] } }) {
   // Extract upcoming active tasks dynamically sorted by target/due date
@@ -20,6 +21,9 @@ export function RightPanel({ todos = [], stats = { categories: [] } }) {
 
   return (
     <aside className="right-panel">
+      {/* Interactive Focus Session Pomodoro Widget */}
+      <FocusModeWidget todos={todos} />
+
       {/* Category Breakdown Progress */}
       <div className="panel-widget">
         <div className="widget-header">

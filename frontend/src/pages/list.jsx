@@ -3,10 +3,11 @@ import { Sidebar } from '../components/Common/Sidebar.jsx';
 import { Header } from '../components/Common/Header.jsx';
 import { TaskCard } from '../components/ListPage/TaskCard.jsx';
 import { QuickAddModal } from '../components/ListPage/QuickAddModal.jsx';
+import { RightPanel } from '../components/ListPage/RightPanel.jsx';
 import { TodoApi } from '../api/todoApi.js';
 import { 
-  Search, Filter, ListTodo, Clock, CheckCircle2, AlertTriangle, 
-  SlidersHorizontal, Sparkles, Plus, Layers
+  Search, ListTodo, Clock, CheckCircle2, AlertTriangle, 
+  SlidersHorizontal, Plus
 } from 'lucide-react';
 
 export function ListPage() {
@@ -95,7 +96,7 @@ export function ListPage() {
 
   return (
     <div className="layout-wrapper">
-      {/* Sidebar Navigation */}
+      {/* 1. Left Sidebar Navigation */}
       <Sidebar 
         currentFilter={statusFilter}
         onSelectFilter={(filter) => setStatusFilter(filter)}
@@ -106,11 +107,11 @@ export function ListPage() {
         onOpenCreateModal={() => setIsModalOpen(true)}
       />
 
-      {/* Main Content Pane */}
+      {/* 2. Main Center Content Pane */}
       <div className="main-content">
         <Header currentPage="list" onOpenCreateModal={() => setIsModalOpen(true)} />
 
-        {/* Welcome Header Card */}
+        {/* Welcome Hero Banner */}
         <div className="welcome-banner">
           <div>
             <h2>Task Management Dashboard</h2>
@@ -260,6 +261,9 @@ export function ListPage() {
           </div>
         )}
       </div>
+
+      {/* 3. Right Sidebar Panel */}
+      <RightPanel todos={todos} stats={stats} />
 
       {/* Create Todo Modal */}
       <QuickAddModal 

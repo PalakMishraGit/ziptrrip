@@ -1,0 +1,104 @@
+import React from 'react';
+import { Clock, History, PieChart, ArrowUpRight, CheckCircle2, Calendar, Tag } from 'lucide-react';
+
+export function RightPanel({ todos = [], stats = { categories: [] } }) {
+  // Extract upcoming tasks with due dates
+  const upcomingTasks = todos
+    .filter(t => t.dueDate && t.status !== 'completed')
+    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    .slice(0, 3);
+
+  // Recent activity logs compiled from tasks
+  const recentLogs = todos
+    .flatMap(t => (t.logs || []).map(l => ({ ...l, taskTitle: t.title })))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5);
+
+  return (
+    <aside className="right-panel">
+      {/* Category Breakdown Progress */}
+      <div className="panel-widget">
+        <div className="widget-header">
+          <PieChart size={16} color="var(--accent-primary)" />
+          <h3>Category Breakdown</h3>
+        </div>
+        <div className="widget-body">
+          {stats.categories && stats.categories.length > 0 ? (
+            stats.categories.map(cat => {
+              const catTodos = todos.filter(t => t.category === cat);
+              const total = catTodos.length;
+              const completed = catTodos.filter(t => t.status === 'completed').length;
+              const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+              return (
+                <div key={cat} style={{ marginBottom: '0.85rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.25rem' }}>
+                    <span style={{ color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Tag size={12} color="var(--text-muted)" /> {cat}
+                    </span>
+                    <span style={{ color: 'var(--text-muted)' }}>{completed}/{total} ({pct}%)</span>
+                  </div>
+                  <div className="progress-bar-container" style={{ height: '6px' }}>
+                    <div className="progress-bar-fill" style={{ width: `${pct}%` }}></div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No category data available.</p>
+          )}
+        </div>
+      </div>
+
+      {/* Upcoming Deadlines Widget */}
+      <div className="panel-widget">
+        <div className="widget-header">
+          <Calendar size={16} color="var(--accent-primary)" />
+          <h3>Upcoming Deadlines</h3>
+        </div>
+        <div className="widget-body">
+          {upcomingTasks.length > 0 ? (
+            upcomingTasks.map(t => (
+              <a href={`todo.html?id=${t.id}`} key={t.id} className="upcoming-item">
+                <div style={{ flex: 1 }}>
+                  <div className="upcoming-title">{t.title}</div>
+                  <div className="upcoming-date">
+                    <Clock size={12} /> {new Date(t.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                  </div>
+                </div>
+                <ArrowUpRight size={14} color="var(--text-muted)" />
+              </a>
+            ))
+          ) : (
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No upcoming task deadlines.</p>
+          )}
+        </div>
+      </div>
+
+      {/* Live System Activity Feed */}
+      <div className="panel-widget">
+        <div className="widget-header">
+          <History size={16} color="var(--accent-primary)" />
+          <h3>Recent Activity</h3>
+        </div>
+        <div className="widget-body">
+          {recentLogs.length > 0 ? (
+            recentLogs.map((log, idx) => (
+              <div key={log.id || idx} className="activity-feed-item">
+                <div className="activity-dot"></div>
+                <div className="activity-text">
+                  <strong>{log.action}</strong>
+                  <div className="activity-time">
+                    {new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No recent activity recorded.</p>
+          )}
+        </div>
+      </div>
+    </aside>
+  );
+}

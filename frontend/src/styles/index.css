@@ -1009,22 +1009,58 @@ button, input, select, textarea {
   text-overflow: ellipsis;
 }
 
-/* Welcome Banner */
+/* Welcome Banner Base & Theme-Adaptive Presets */
 .welcome-banner {
-  background: linear-gradient(135deg, #4F46E5 0%, #6366F1 60%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #8B5CF6 100%);
   color: #FFFFFF;
-  border-radius: var(--radius-lg);
-  padding: 1.75rem 2rem;
+  border-radius: var(--radius-xl);
+  padding: 1.6rem 2rem;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 12px 30px -5px rgba(79, 70, 229, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1. True OLED Dark Theme Welcome Banner */
+[data-theme="dark"] .welcome-banner {
+  background: linear-gradient(135deg, #09090B 0%, #121215 50%, #18181B 100%);
+  border: 1px solid #3F3F46;
+  color: #FFFFFF;
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* 2. VS Code Dark+ Theme Welcome Banner */
+[data-theme="vscode"] .welcome-banner {
+  background: linear-gradient(135deg, #0E639C 0%, #1E1E1E 55%, #007ACC 100%);
+  border: 1px solid #007ACC;
+  color: #FFFFFF;
+  box-shadow: 0 10px 28px rgba(0, 122, 204, 0.3);
+}
+
+/* 3. Dracula Neon Theme Welcome Banner */
+[data-theme="dracula"] .welcome-banner {
+  background: linear-gradient(135deg, #44475A 0%, #6272A4 45%, #BD93F9 80%, #FF79C6 100%);
+  border: 1px solid #FF79C6;
+  color: #F8F8F2;
+  box-shadow: 0 12px 32px rgba(255, 121, 198, 0.3);
+}
+
+/* 4. Nord Ice Slate Theme Welcome Banner */
+[data-theme="nord"] .welcome-banner {
+  background: linear-gradient(135deg, #2E3440 0%, #3B4252 50%, #5E81AC 80%, #88C0D0 100%);
+  border: 1px solid #88C0D0;
+  color: #ECEFF4;
+  box-shadow: 0 10px 28px rgba(136, 192, 208, 0.3);
 }
 
 .welcome-banner h2 {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.25;
   color: #FFFFFF !important;
@@ -1037,11 +1073,67 @@ button, input, select, textarea {
   color: #FFFFFF !important;
 }
 
+.banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.banner-clock-badge {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.live-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+.quote-dots-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+}
+
+.quote-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.quote-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.quote-dot.active {
+  width: 18px;
+  border-radius: 4px;
+  background: #FFFFFF;
+}
+
 .welcome-banner .btn-primary {
   background: #FFFFFF !important;
   color: #312E81 !important;
   font-weight: 800 !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
   white-space: nowrap;
 }
 

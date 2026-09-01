@@ -1,8 +1,8 @@
 const API_BASE = '/api';
 
 const isStaticHost = typeof window !== 'undefined' && (
-  window.location.hostname.includes('github.io') ||
-  window.location.protocol === 'file:'
+  window.location.hostname !== 'localhost' &&
+  window.location.hostname !== '127.0.0.1'
 );
 
 const DEMO_TODOS = [

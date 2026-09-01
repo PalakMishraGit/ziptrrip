@@ -2345,15 +2345,17 @@ button, input, select, textarea {
   }
 }
 
+@media (max-width: 900px) {
+  .navbar-status-chip {
+    display: none !important;
+  }
+}
+
 @media (max-width: 640px) {
   .top-navbar {
     padding: 0.65rem 0.85rem;
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-
-  .navbar-status-chip {
-    display: none !important;
   }
 
   .navbar-left {

@@ -2344,3 +2344,34 @@ button, input, select, textarea {
     justify-content: center;
   }
 }
+
+@media (max-width: 640px) {
+  .top-navbar {
+    padding: 0.65rem 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .navbar-status-chip {
+    display: none !important;
+  }
+
+  .navbar-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .navbar-right {
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-path {
+    font-size: 0.75rem;
+  }
+
+  .theme-popover, .notifications-dropdown {
+    right: -10px;
+    width: 280px;
+    max-width: 88vw;
+  }
+}

@@ -1,5 +1,10 @@
 const API_BASE = '/api';
 
+const isStaticHost = typeof window !== 'undefined' && (
+  window.location.hostname.includes('github.io') ||
+  window.location.protocol === 'file:'
+);
+
 const DEMO_TODOS = [
   {
     id: 'todo-1',
@@ -107,22 +112,24 @@ function saveLocalTodos(todos) {
 export const TodoApi = {
   // Fetch list of todos with search & filters
   async fetchTodos(params = {}) {
-    try {
-      const query = new URLSearchParams();
-      if (params.status && params.status !== 'all') query.append('status', params.status);
-      if (params.priority && params.priority !== 'all') query.append('priority', params.priority);
-      if (params.category && params.category !== 'all') query.append('category', params.category);
-      if (params.search) query.append('search', params.search);
-      if (params.sortBy) query.append('sortBy', params.sortBy);
-      if (params.sortOrder) query.append('sortOrder', params.sortOrder);
+    if (!isStaticHost) {
+      try {
+        const query = new URLSearchParams();
+        if (params.status && params.status !== 'all') query.append('status', params.status);
+        if (params.priority && params.priority !== 'all') query.append('priority', params.priority);
+        if (params.category && params.category !== 'all') query.append('category', params.category);
+        if (params.search) query.append('search', params.search);
+        if (params.sortBy) query.append('sortBy', params.sortBy);
+        if (params.sortOrder) query.append('sortOrder', params.sortOrder);
 
-      const res = await fetch(`${API_BASE}/todos?${query.toString()}`);
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting (e.g. GitHub Pages)
+        const res = await fetch(`${API_BASE}/todos?${query.toString()}`);
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback if local backend is down
+      }
     }
 
-    // LocalStorage Fallback Processing
+    // LocalStorage Engine for Static Hosting (GitHub Pages)
     let todos = getLocalTodos();
 
     if (params.status && params.status !== 'all') {
@@ -160,11 +167,13 @@ export const TodoApi = {
 
   // Fetch dashboard statistics
   async fetchStats() {
-    try {
-      const res = await fetch(`${API_BASE}/stats`);
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/stats`);
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback if local backend is down
+      }
     }
 
     const todos = getLocalTodos();
@@ -185,12 +194,14 @@ export const TodoApi = {
 
   // Fetch single todo by ID
   async fetchTodoById(id) {
-    try {
-      const res = await fetch(`${API_BASE}/todos/${id}`);
-      if (res.status === 404) return null;
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos/${id}`);
+        if (res.status === 404) return null;
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback if local backend is down
+      }
     }
 
     const todos = getLocalTodos();
@@ -201,15 +212,17 @@ export const TodoApi = {
 
   // Create new todo item
   async createTodo(todoData) {
-    try {
-      const res = await fetch(`${API_BASE}/todos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(todoData)
-      });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(todoData)
+        });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();
@@ -247,15 +260,17 @@ export const TodoApi = {
 
   // Update existing todo item
   async updateTodo(id, todoData) {
-    try {
-      const res = await fetch(`${API_BASE}/todos/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(todoData)
-      });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(todoData)
+        });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();
@@ -270,11 +285,13 @@ export const TodoApi = {
 
   // Toggle todo status fast
   async toggleTodoStatus(id) {
-    try {
-      const res = await fetch(`${API_BASE}/todos/${id}/toggle`, { method: 'PATCH' });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos/${id}/toggle`, { method: 'PATCH' });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();
@@ -290,11 +307,13 @@ export const TodoApi = {
 
   // Delete todo item
   async deleteTodo(id) {
-    try {
-      const res = await fetch(`${API_BASE}/todos/${id}`, { method: 'DELETE' });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos/${id}`, { method: 'DELETE' });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     let todos = getLocalTodos();
@@ -305,15 +324,17 @@ export const TodoApi = {
 
   // Subtask APIs
   async addSubtask(todoId, title) {
-    try {
-      const res = await fetch(`${API_BASE}/todos/${todoId}/subtasks`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title })
-      });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/todos/${todoId}/subtasks`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title })
+        });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();
@@ -330,11 +351,13 @@ export const TodoApi = {
   },
 
   async toggleSubtask(subtaskId) {
-    try {
-      const res = await fetch(`${API_BASE}/subtasks/${subtaskId}/toggle`, { method: 'PATCH' });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/subtasks/${subtaskId}/toggle`, { method: 'PATCH' });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();
@@ -351,11 +374,13 @@ export const TodoApi = {
   },
 
   async deleteSubtask(subtaskId) {
-    try {
-      const res = await fetch(`${API_BASE}/subtasks/${subtaskId}`, { method: 'DELETE' });
-      if (res.ok) return await res.json();
-    } catch {
-      // Fallback for static hosting
+    if (!isStaticHost) {
+      try {
+        const res = await fetch(`${API_BASE}/subtasks/${subtaskId}`, { method: 'DELETE' });
+        if (res.ok) return await res.json();
+      } catch {
+        // Fallback
+      }
     }
 
     const todos = getLocalTodos();

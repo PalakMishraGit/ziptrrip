@@ -1456,12 +1456,18 @@ button, input, select, textarea {
   border-bottom-left-radius: var(--radius-lg);
   pointer-events: none;
   z-index: 1;
+  transition: opacity 0.25s ease;
 }
 
 .task-card.prio-stripe-low::after { background: var(--prio-low-stripe); }
 .task-card.prio-stripe-medium::after { background: var(--prio-medium-stripe); }
 .task-card.prio-stripe-high::after { background: var(--prio-high-stripe); }
 .task-card.prio-stripe-urgent::after { background: var(--prio-urgent-stripe); }
+
+/* Hide side priority strip on hover or highlight so ONLY the revolving laser line is visible */
+.task-card:hover::after, .task-card.highlighted-card::after {
+  opacity: 0 !important;
+}
 
 .task-card:hover {
   transform: translateY(-4px);

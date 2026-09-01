@@ -7,11 +7,12 @@
 
 ## 🏛️ Executive Summary
 
-When designing a production-grade application with explicit non-SPA (Multi-Page Application) constraints and a query-parameter driven detail page architecture, several architectural principles must be balanced:
+When designing a production-grade enterprise application with explicit non-SPA (Multi-Page Application) constraints, high visual interactivity, and query-parameter driven detail routing, several core architectural principles must be balanced:
 
 1. **Strict Multi-Page Routing vs. Client-Side SPA**: Fulfilling multi-page browser mechanics while retaining modern React component reusability and fast build pipelines.
-2. **Layered Separation of Concerns**: Decoupling the HTTP layer (Express Controllers) from Business Logic (Services) and Persistence (SQLite).
-3. **Optimized User Experience**: Providing micro-animations, glassmorphism UI, search/filter responsiveness, subtask progress tracking, and detailed audit history.
+2. **Motion Design & Performance**: Delivering rich 3D card flips, radial confetti explosions, and revolving laser sweeps using hardware-accelerated CSS without heavy animation dependencies.
+3. **Deferred State Persistence & Optimistic UI**: Decoupling transient UI animation states from parent re-renders to guarantee smooth 5-second celebration sequences.
+4. **Layered Backend Separation of Concerns**: Decoupling the HTTP layer (Express Controllers) from Business Logic (Services) and Persistence (SQLite).
 
 ---
 
@@ -39,7 +40,33 @@ Browser Request -> GET /todo.html?id=todo-1 ---> Load Page 2 Bundle (DetailPage)
 
 ---
 
-### 2. Persistence Layer: Relational SQLite (`better-sqlite3`)
+### 2. Motion Design Architecture & Deferred State Persistence
+
+**Challenge**: When a task completion status changes, triggering an immediate parent state update or background API fetch causes the parent component (`ListPage`) to re-render the task list (`todos.map(...)`). Re-rendering unmounts or re-instantiates the `<TaskCard />` component, which prematurely resets local state (like `isFlipping`) before a multi-second celebration finishes.
+
+**Solution: Optimistic Local State & Deferred Sync Pattern**:
+```
+User Clicks Checkbox 
+   │
+   ├──> 1. Optimistically update local completed state (setLocalCompleted)
+   ├──> 2. Activate 3D Card Flip & 5-Second Celebration (setIsFlipping(true))
+   │       └── Card 3D Flips -> SVG Checkmark Draws -> 12-Particle Confetti Explodes
+   │
+   └──> 3. Hold celebration for full 5.0 seconds
+           │
+           └──> After 5000ms:
+                ├── Flip back to front face (setIsFlipping(false))
+                └── Notify parent API sync (onToggleStatus(task.id))
+```
+
+**Animation Hardware Acceleration**:
+- **CSS 3D Transforms**: `perspective: 1200px`, `transform-style: preserve-3d`, `backface-visibility: hidden` for smooth 60fps card flips.
+- **SVG Path Stroke Engine**: Uses `stroke-dasharray` and `stroke-dashoffset` keyframes (`@keyframes strokeCircle`, `@keyframes strokeCheck`) to animate checkmark drawing bottom-to-top.
+- **0-100% Revolving Laser Sweep**: SVG `<rect pathLength="100">` with `stroke-dasharray: 28 72` and `@keyframes borderSweepProgress` aligned to exact outer card border edges (`x="0.75" y="0.75"`).
+
+---
+
+### 3. Persistence Layer: Relational SQLite (`better-sqlite3`)
 
 **Decision**: Chosen over simple JSON files or external database instances.
 
@@ -51,7 +78,7 @@ Browser Request -> GET /todo.html?id=todo-1 ---> Load Page 2 Bundle (DetailPage)
 
 ---
 
-### 3. Modular Backend Architecture (Layered Pattern)
+### 4. Modular Backend Architecture (Layered Pattern)
 
 ```
 [ HTTP Request ] -> [ Express Router ] -> [ Controller Validation ] -> [ Service Logic ] -> [ SQLite Database ]
@@ -61,15 +88,6 @@ Browser Request -> GET /todo.html?id=todo-1 ---> Load Page 2 Bundle (DetailPage)
 2. **Controllers (`controllers/todoController.js`)**: Input validation (string checks, priority/status enum enforcement), HTTP status code mapping (200, 201, 400, 404, 500).
 3. **Services (`services/todoService.js`)**: SQL statement preparation, parameter binding, transactions, and business calculations (e.g. overdue status, subtask progress stats).
 4. **Middleware (`middleware/errorHandler.js`)**: Centralized error handling catching unhandled exceptions and returning formatted JSON `{ success: false, error: ... }`.
-
----
-
-### 4. UI/UX Design System (Vanilla CSS + Modern Tokens)
-
-- **Palette**: Dark Mode slate tones (`#0B0F19`), indigo (`#6366F1`) & violet accents (`#8B5CF6`).
-- **Glassmorphism**: Translucent cards (`rgba(18, 24, 38, 0.75)`) with `backdrop-filter: blur(16px)` and subtle borders (`rgba(255, 255, 255, 0.08)`).
-- **Typography**: Inter / Plus Jakarta Sans for clean legibility and JetBrains Mono for ID badges and timestamps.
-- **Responsive Layout**: CSS Grid and Flexbox with media queries supporting desktop, tablet, and mobile displays.
 
 ---
 

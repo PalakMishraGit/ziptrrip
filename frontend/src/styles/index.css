@@ -1924,3 +1924,69 @@ button, input, select, textarea {
   transform: scale(0.93) !important;
   transition: transform 0.1s ease;
 }
+
+/* 8. Highlighted Task Card 0%-100% Revolving Border Laser Progress + Card Shake */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorderSweep {
+  0% {
+    --border-angle: 0deg;
+  }
+  100% {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes cardShakeWiggle {
+  0%, 72%, 100% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-3.5deg);
+  }
+  79% {
+    transform: translateY(-5px) rotate(3.5deg);
+  }
+  83% {
+    transform: translateY(-5px) rotate(-2.5deg);
+  }
+  87% {
+    transform: translateY(-5px) rotate(2.5deg);
+  }
+  91% {
+    transform: translateY(-5px) rotate(-1.5deg);
+  }
+  95% {
+    transform: translateY(-5px) rotate(1.5deg);
+  }
+}
+
+.task-card.highlighted-card {
+  position: relative;
+  border-color: transparent !important;
+  background-image: 
+    linear-gradient(var(--bg-card), var(--bg-card)), 
+    conic-gradient(from var(--border-angle), var(--accent-primary) 0deg, #8B5CF6 80deg, #EC4899 150deg, transparent 220deg, transparent 360deg);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 14px 36px -6px rgba(79, 70, 229, 0.38), 0 0 20px rgba(99, 102, 241, 0.2);
+  animation: rotateBorderSweep 2.2s linear infinite, cardShakeWiggle 3.8s ease-in-out infinite;
+  z-index: 2;
+}
+
+.task-card.highlighted-card::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: calc(var(--radius-xl) + 3px);
+  background: conic-gradient(from var(--border-angle), var(--accent-primary) 0deg, #8B5CF6 80deg, #EC4899 150deg, transparent 220deg, transparent 360deg);
+  z-index: -1;
+  animation: rotateBorderSweep 2.2s linear infinite;
+  opacity: 0.85;
+  filter: blur(6px);
+  pointer-events: none;
+}

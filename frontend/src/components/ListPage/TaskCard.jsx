@@ -1,7 +1,10 @@
-import React from 'react';
-import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, Pin } from 'lucide-react';
 
-export function TaskCard({ task, onToggleStatus, onDelete }) {
+export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned, onTogglePin }) {
+  const [localPinned, setLocalPinned] = useState(false);
+  const isPinned = propPinned !== undefined ? propPinned : localPinned;
+
   const isCompleted = task.status === 'completed';
 
   const priorityClass = {
@@ -21,8 +24,17 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
 
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && !isCompleted;
 
+  const handlePinClick = (e) => {
+    e.stopPropagation();
+    if (onTogglePin) {
+      onTogglePin(task.id);
+    } else {
+      setLocalPinned(prev => !prev);
+    }
+  };
+
   return (
-    <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''}`}>
+    <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
       <div className="task-card-inner-top">
         <div className="task-header">
           <div className="task-header-left">
@@ -45,16 +57,35 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
             )}
           </div>
 
-          <button 
-            className="btn btn-icon-danger" 
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(task.id);
-            }}
-            title="Delete task"
-          >
-            <Trash2 size={15} />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            <button 
+              className={`btn btn-icon-secondary ${isPinned ? 'pinned-active' : ''}`}
+              onClick={handlePinClick}
+              title={isPinned ? 'Unpin/Unhighlight task' : 'Pin/Highlight task with revolving border & shake'}
+              style={{
+                background: isPinned ? 'rgba(79, 70, 229, 0.15)' : 'transparent',
+                color: isPinned ? 'var(--accent-primary)' : 'var(--text-muted)',
+                border: 'none',
+                padding: '0.35rem',
+                borderRadius: 'var(--radius-sm)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <Pin size={15} style={{ transform: isPinned ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s ease' }} />
+            </button>
+
+            <button 
+              className="btn btn-icon-danger" 
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(task.id);
+              }}
+              title="Delete task"
+            >
+              <Trash2 size={15} />
+            </button>
+          </div>
         </div>
 
         <a href={`todo.html?id=${task.id}`} className="task-title">

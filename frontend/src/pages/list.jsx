@@ -66,6 +66,14 @@ export function ListPage() {
     loadData();
   }, [loadData]);
 
+  const [pinnedTaskIds, setPinnedTaskIds] = useState([1]);
+
+  const handleTogglePin = (id) => {
+    setPinnedTaskIds(prev => 
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  };
+
   const handleToggleStatus = async (id) => {
     try {
       await TodoApi.toggleTodoStatus(id);
@@ -248,6 +256,8 @@ export function ListPage() {
                 task={todo} 
                 onToggleStatus={handleToggleStatus}
                 onDelete={handleDeleteTodo}
+                isPinned={pinnedTaskIds.includes(todo.id)}
+                onTogglePin={handleTogglePin}
               />
             ))}
           </div>

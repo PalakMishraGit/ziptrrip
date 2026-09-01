@@ -1,5 +1,5 @@
 :root {
-  /* Color Palette - Premium Modern Dashboard Light Theme */
+  /* Color Palette - Premium Light Theme (Default) */
   --bg-main: #F8FAFC;
   --bg-sidebar: #FFFFFF;
   --bg-card: #FFFFFF;
@@ -55,6 +55,65 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-main: #0B0F19;
+  --bg-sidebar: #0F172A;
+  --bg-card: #1E293B;
+  --bg-card-hover: #334155;
+  --bg-input: #0F172A;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --border-accent: #6366F1;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --text-muted: #94A3B8;
+  --text-bright-accent: #818CF8;
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .top-navbar,
+[data-theme="dark"] .right-panel,
+[data-theme="dark"] .panel-widget,
+[data-theme="dark"] .chip,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .upcoming-item,
+[data-theme="dark"] .subtask-item,
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .navbar-icon-btn,
+[data-theme="dark"] .sidebar-widget {
+  background: #1E293B;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .search-box input,
+[data-theme="dark"] .select-control,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .editable-desc {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .task-cat-badge {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .sidebar-nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .sidebar-nav-item.active {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818CF8;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -68,6 +127,7 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -100,6 +160,7 @@ button, input, select, textarea {
   height: 100vh;
   overflow-y: auto;
   flex-shrink: 0;
+  transition: background 0.3s ease;
 }
 
 .sidebar-brand {
@@ -248,6 +309,7 @@ button, input, select, textarea {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  transition: background 0.3s ease;
 }
 
 .panel-widget {
@@ -348,6 +410,7 @@ button, input, select, textarea {
   border-radius: var(--radius-lg);
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-card);
+  transition: background 0.3s ease;
 }
 
 .navbar-breadcrumb {
@@ -391,6 +454,12 @@ button, input, select, textarea {
   justify-content: center;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s ease;
+}
+
+.navbar-icon-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-accent);
 }
 
 .notification-dot {
@@ -620,7 +689,6 @@ button, input, select, textarea {
 
 .search-box input:focus {
   border-color: var(--accent-primary);
-  background: #FFFFFF;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
@@ -655,7 +723,6 @@ button, input, select, textarea {
 
 .select-control:focus {
   border-color: var(--accent-primary);
-  background: #FFFFFF;
 }
 
 /* Category Chips */
@@ -719,7 +786,6 @@ button, input, select, textarea {
 }
 
 .task-card.completed {
-  background: #F8FAFC;
   opacity: 0.85;
 }
 
@@ -923,7 +989,6 @@ button, input, select, textarea {
 
 .form-control:focus {
   border-color: var(--accent-primary);
-  background: #FFFFFF;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
@@ -1001,7 +1066,6 @@ button, input, select, textarea {
 
 .editable-desc:focus {
   border-color: var(--accent-primary);
-  background: #FFFFFF;
 }
 
 .subtask-item {

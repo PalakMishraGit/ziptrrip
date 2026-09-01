@@ -1,17 +1,23 @@
 import React from 'react';
 import { 
   CheckSquare, LayoutDashboard, Clock, AlertTriangle, CheckCircle2, 
-  Tag, Folder, TrendingUp, User
+  TrendingUp, User, Flame, Zap, ShieldAlert, Layers, ShieldCheck, Activity
 } from 'lucide-react';
 
 export function Sidebar({ 
   currentFilter, 
   onSelectFilter, 
-  categories = [], 
-  selectedCategory, 
-  onSelectCategory,
-  stats = { total: 0, completed: 0, pending: 0, completionRate: 0 }
+  priorityFilter = 'all', 
+  onSelectPriority,
+  stats = { total: 0, completed: 0, pending: 0, completionRate: 0, overdue: 0 },
+  todos = []
 }) {
+  // Compute priority counts dynamically
+  const urgentCount = todos.filter(t => t.priority === 'urgent' && t.status !== 'completed').length;
+  const highCount = todos.filter(t => t.priority === 'high' && t.status !== 'completed').length;
+  const mediumCount = todos.filter(t => t.priority === 'medium' && t.status !== 'completed').length;
+  const lowCount = todos.filter(t => t.priority === 'low' && t.status !== 'completed').length;
+
   return (
     <aside className="app-sidebar">
       {/* Brand Header */}
@@ -30,8 +36,8 @@ export function Sidebar({
         <div className="sidebar-section-title">Navigation</div>
         
         <div 
-          className={`sidebar-nav-item ${currentFilter === 'all' && selectedCategory === 'all' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('all'); onSelectCategory('all'); }}
+          className={`sidebar-nav-item ${currentFilter === 'all' && priorityFilter === 'all' ? 'active' : ''}`}
+          onClick={() => { onSelectFilter('all'); onSelectPriority('all'); }}
         >
           <LayoutDashboard size={18} />
           <span>All Tasks</span>
@@ -40,7 +46,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'pending' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('pending'); onSelectCategory('all'); }}
+          onClick={() => { onSelectFilter('pending'); onSelectPriority('all'); }}
         >
           <Clock size={18} />
           <span>In Progress / Active</span>
@@ -49,7 +55,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'completed' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('completed'); onSelectCategory('all'); }}
+          onClick={() => { onSelectFilter('completed'); onSelectPriority('all'); }}
         >
           <CheckCircle2 size={18} />
           <span>Completed</span>
@@ -58,7 +64,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'overdue' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('overdue'); onSelectCategory('all'); }}
+          onClick={() => { onSelectFilter('overdue'); onSelectPriority('all'); }}
         >
           <AlertTriangle size={18} color="#DC2626" />
           <span style={{ color: stats.overdue > 0 ? '#DC2626' : 'inherit' }}>Overdue Tasks</span>
@@ -66,26 +72,53 @@ export function Sidebar({
         </div>
       </div>
 
-      {/* Categories Section */}
+      {/* Priority Matrix Section (Replaces Categories) */}
       <div className="sidebar-section">
-        <div className="sidebar-section-title">Categories</div>
+        <div className="sidebar-section-title">Priority Matrix</div>
+        
         <div 
-          className={`sidebar-nav-item ${selectedCategory === 'all' && currentFilter !== 'overdue' ? 'active' : ''}`}
-          onClick={() => onSelectCategory('all')}
+          className={`sidebar-nav-item ${priorityFilter === 'all' && currentFilter === 'all' ? 'active' : ''}`}
+          onClick={() => { onSelectPriority('all'); onSelectFilter('all'); }}
         >
-          <Folder size={16} />
-          <span>All Categories</span>
+          <Layers size={16} />
+          <span>All Priorities</span>
         </div>
-        {categories.map(cat => (
-          <div 
-            key={cat}
-            className={`sidebar-nav-item ${selectedCategory === cat ? 'active' : ''}`}
-            onClick={() => onSelectCategory(cat)}
-          >
-            <Tag size={15} />
-            <span>{cat}</span>
-          </div>
-        ))}
+
+        <div 
+          className={`sidebar-nav-item ${priorityFilter === 'urgent' ? 'active' : ''}`}
+          onClick={() => { onSelectPriority('urgent'); onSelectFilter('all'); }}
+        >
+          <Flame size={16} color="#EF4444" />
+          <span style={{ color: urgentCount > 0 ? '#EF4444' : 'inherit' }}>Urgent Priority</span>
+          {urgentCount > 0 && <span className="nav-count-badge urgent">{urgentCount}</span>}
+        </div>
+
+        <div 
+          className={`sidebar-nav-item ${priorityFilter === 'high' ? 'active' : ''}`}
+          onClick={() => { onSelectPriority('high'); onSelectFilter('all'); }}
+        >
+          <Zap size={16} color="#F59E0B" />
+          <span>High Priority</span>
+          {highCount > 0 && <span className="nav-count-badge">{highCount}</span>}
+        </div>
+
+        <div 
+          className={`sidebar-nav-item ${priorityFilter === 'medium' ? 'active' : ''}`}
+          onClick={() => { onSelectPriority('medium'); onSelectFilter('all'); }}
+        >
+          <ShieldAlert size={16} color="#3B82F6" />
+          <span>Medium Priority</span>
+          {mediumCount > 0 && <span className="nav-count-badge">{mediumCount}</span>}
+        </div>
+
+        <div 
+          className={`sidebar-nav-item ${priorityFilter === 'low' ? 'active' : ''}`}
+          onClick={() => { onSelectPriority('low'); onSelectFilter('all'); }}
+        >
+          <ShieldCheck size={16} color="#10B981" />
+          <span>Low Priority</span>
+          {lowCount > 0 && <span className="nav-count-badge">{lowCount}</span>}
+        </div>
       </div>
 
       {/* Productivity Progress Widget */}

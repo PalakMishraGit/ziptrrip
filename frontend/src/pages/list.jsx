@@ -101,11 +101,10 @@ export function ListPage() {
       <Sidebar 
         currentFilter={statusFilter}
         onSelectFilter={(filter) => setStatusFilter(filter)}
-        categories={stats.categories || []}
-        selectedCategory={selectedCategory}
-        onSelectCategory={(cat) => setSelectedCategory(cat)}
+        priorityFilter={priorityFilter}
+        onSelectPriority={(prio) => setPriorityFilter(prio)}
         stats={stats}
-        onOpenCreateModal={() => setIsModalOpen(true)}
+        todos={todos}
       />
 
       {/* 2. Main Center Content Pane */}

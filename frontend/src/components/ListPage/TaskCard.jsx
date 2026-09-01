@@ -64,15 +64,15 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
       <div className="task-card-3d-inner">
         {/* Front Face of Task Card */}
         <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
-          {/* SVG Overlay for 0-100% Border Revolving Laser Progress Animation */}
+          {/* SVG Overlay aligned to exact outer border edge */}
           <svg className="card-border-svg">
             <rect 
-              x="2" 
-              y="2" 
-              width="calc(100% - 4px)" 
-              height="calc(100% - 4px)" 
-              rx="22" 
-              ry="22" 
+              x="1.5" 
+              y="1.5" 
+              width="calc(100% - 3px)" 
+              height="calc(100% - 3px)" 
+              rx="20" 
+              ry="20" 
               pathLength="100" 
               className="border-rect"
             />
@@ -169,7 +169,7 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
           </div>
         </div>
 
-        {/* Back Face of Card - 3D Celebration Flip with Full Green Cover & Bottom-to-Top Animated Tick */}
+        {/* Back Face of Card - 3D Celebration Flip with Full Green Cover & Centered Animated Tick */}
         <div className="task-card-back">
           {/* Confetti Explosion Particles */}
           <div className="confetti-burst">

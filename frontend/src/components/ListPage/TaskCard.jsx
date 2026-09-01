@@ -64,15 +64,15 @@ export function TaskCard({ task, onToggleStatus, onDelete, isPinned: propPinned,
       <div className="task-card-3d-inner">
         {/* Front Face of Task Card */}
         <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''} ${isPinned ? 'highlighted-card' : ''}`}>
-          {/* SVG Overlay aligned to exact outer border edge */}
+          {/* SVG Overlay tracing exact outer border path */}
           <svg className="card-border-svg">
             <rect 
-              x="1.5" 
-              y="1.5" 
-              width="calc(100% - 3px)" 
-              height="calc(100% - 3px)" 
-              rx="20" 
-              ry="20" 
+              x="0.75" 
+              y="0.75" 
+              width="calc(100% - 1.5px)" 
+              height="calc(100% - 1.5px)" 
+              rx="16" 
+              ry="16" 
               pathLength="100" 
               className="border-rect"
             />

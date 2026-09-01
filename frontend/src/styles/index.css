@@ -1,9 +1,9 @@
-:root {
+:root, [data-theme="light"] {
   /* Color Palette - Premium Light Theme (Default) */
   --bg-main: #F8FAFC;
   --bg-sidebar: #FFFFFF;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
   --bg-input: #F1F5F9;
   
   --border-color: #E2E8F0;
@@ -53,6 +53,124 @@
 
   --font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* 1. Pure OLED Dark Black Theme Presets */
+[data-theme="dark"] {
+  --bg-main: #000000;
+  --bg-sidebar: #09090B;
+  --bg-card: #121215;
+  --bg-card-hover: #18181B;
+  --bg-input: #000000;
+
+  --border-color: #27272A;
+  --border-hover: #3F3F46;
+  --border-accent: #6366F1;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #F4F4F5;
+  --text-muted: #D4D4D8;
+  --text-bright-accent: #A5B4FC;
+
+  --accent-primary: #6366F1;
+  --accent-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #8B5CF6 100%);
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.7);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* 2. VS Code Dark+ Theme */
+[data-theme="vscode"] {
+  --bg-main: #1E1E1E;
+  --bg-sidebar: #252526;
+  --bg-card: #2D2D2D;
+  --bg-card-hover: #37373D;
+  --bg-input: #1E1E1E;
+
+  --border-color: #3C3C3C;
+  --border-hover: #007ACC;
+  --border-accent: #007ACC;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+  --text-muted: #9DA5B4;
+  --text-bright-accent: #4FC1FF;
+
+  --accent-primary: #007ACC;
+  --accent-gradient: linear-gradient(135deg, #0E639C 0%, #007ACC 100%);
+
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 8px 24px rgba(0, 122, 204, 0.25);
+}
+
+/* 3. Dracula Neon Theme */
+[data-theme="dracula"] {
+  --bg-main: #282A36;
+  --bg-sidebar: #21222C;
+  --bg-card: #343746;
+  --bg-card-hover: #44475A;
+  --bg-input: #21222C;
+
+  --border-color: #44475A;
+  --border-hover: #BD93F9;
+  --border-accent: #FF79C6;
+
+  --text-primary: #F8F8F2;
+  --text-secondary: #F8F8F2;
+  --text-muted: #BD93F9;
+  --text-bright-accent: #FF79C6;
+
+  --accent-primary: #FF79C6;
+  --accent-gradient: linear-gradient(135deg, #BD93F9 0%, #FF79C6 100%);
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 10px 30px rgba(255, 121, 198, 0.2);
+}
+
+/* 4. Nord Ice Slate Theme */
+[data-theme="nord"] {
+  --bg-main: #2E3440;
+  --bg-sidebar: #242933;
+  --bg-card: #3B4252;
+  --bg-card-hover: #434C5E;
+  --bg-input: #2E3440;
+
+  --border-color: #4C566A;
+  --border-hover: #88C0D0;
+  --border-accent: #81A1C1;
+
+  --text-primary: #ECEFF4;
+  --text-secondary: #E5E9F0;
+  --text-muted: #D8DEE9;
+  --text-bright-accent: #88C0D0;
+
+  --accent-primary: #88C0D0;
+  --accent-gradient: linear-gradient(135deg, #5E81AC 0%, #88C0D0 100%);
+
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 10px 28px rgba(136, 192, 208, 0.2);
+}
+
+/* Priority Badges Neon Glow in Dark Themes */
+[data-theme="dark"] .prio-low, [data-theme="vscode"] .prio-low, [data-theme="dracula"] .prio-low, [data-theme="nord"] .prio-low {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #6EE7B7 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+[data-theme="dark"] .prio-medium, [data-theme="vscode"] .prio-medium, [data-theme="dracula"] .prio-medium, [data-theme="nord"] .prio-medium {
+  background: rgba(59, 130, 246, 0.25) !important;
+  color: #93C5FD !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+}
+[data-theme="dark"] .prio-high, [data-theme="vscode"] .prio-high, [data-theme="dracula"] .prio-high, [data-theme="nord"] .prio-high {
+  background: rgba(245, 158, 11, 0.25) !important;
+  color: #FDE047 !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+[data-theme="dark"] .prio-urgent, [data-theme="vscode"] .prio-urgent, [data-theme="dracula"] .prio-urgent, [data-theme="nord"] .prio-urgent {
+  background: rgba(239, 68, 68, 0.25) !important;
+  color: #FCA5A5 !important;
+  border-color: rgba(239, 68, 68, 0.5) !important;
 }
 
 /* Dynamic Motion Design & Micro-Animations Keyframes */
@@ -195,124 +313,6 @@
   animation: shimmer 0.85s ease-in-out;
 }
 
-/* ===================================================
-   THEME PRESETS:
-   1. [data-theme="light"] (Enterprise Light)
-   2. [data-theme="dark"] (Pure OLED Black)
-   3. [data-theme="vscode"] (VS Code Dark+)
-   4. [data-theme="dracula"] (Dracula Neon)
-   5. [data-theme="nord"] (Nord Ice Slate)
-   =================================================== */
-
-/* 1. Pure OLED Dark Black Theme Overrides */
-[data-theme="dark"] {
-  --bg-main: #000000;
-  --bg-sidebar: #09090B;
-  --bg-card: #121215;
-  --bg-card-hover: #18181B;
-  --bg-input: #000000;
-
-  --border-color: #27272A;
-  --border-hover: #3F3F46;
-  --border-accent: #6366F1;
-
-  --text-primary: #FFFFFF;
-  --text-secondary: #F4F4F5;
-  --text-muted: #D4D4D8;
-  --text-bright-accent: #A5B4FC;
-
-  --accent-primary: #6366F1;
-  --accent-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #8B5CF6 100%);
-
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.7);
-  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.9);
-}
-
-/* 2. VS Code Dark+ Theme */
-[data-theme="vscode"] {
-  --bg-main: #1E1E1E;
-  --bg-sidebar: #252526;
-  --bg-card: #2D2D2D;
-  --bg-card-hover: #37373D;
-  --bg-input: #1E1E1E;
-
-  --border-color: #3C3C3C;
-  --border-hover: #007ACC;
-  --border-accent: #007ACC;
-
-  --text-primary: #FFFFFF;
-  --text-secondary: #CCCCCC;
-  --text-muted: #9DA5B4;
-  --text-bright-accent: #4FC1FF;
-
-  --accent-primary: #007ACC;
-  --accent-gradient: linear-gradient(135deg, #0E639C 0%, #007ACC 100%);
-
-  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --shadow-hover: 0 8px 24px rgba(0, 122, 204, 0.25);
-}
-
-/* 3. Dracula Neon Theme */
-[data-theme="dracula"] {
-  --bg-main: #282A36;
-  --bg-sidebar: #21222C;
-  --bg-card: #343746;
-  --bg-card-hover: #44475A;
-  --bg-input: #21222C;
-
-  --border-color: #44475A;
-  --border-hover: #BD93F9;
-  --border-accent: #FF79C6;
-
-  --text-primary: #F8F8F2;
-  --text-secondary: #F8F8F2;
-  --text-muted: #BD93F9;
-  --text-bright-accent: #FF79C6;
-
-  --accent-primary: #FF79C6;
-  --accent-gradient: linear-gradient(135deg, #BD93F9 0%, #FF79C6 100%);
-
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 10px 30px rgba(255, 121, 198, 0.2);
-}
-
-/* 4. Nord Ice Slate Theme */
-[data-theme="nord"] {
-  --bg-main: #2E3440;
-  --bg-sidebar: #242933;
-  --bg-card: #3B4252;
-  --bg-card-hover: #434C5E;
-  --bg-input: #2E3440;
-
-  --border-color: #4C566A;
-  --border-hover: #88C0D0;
-  --border-accent: #81A1C1;
-
-  --text-primary: #ECEFF4;
-  --text-secondary: #E5E9F0;
-  --text-muted: #D8DEE9;
-  --text-bright-accent: #88C0D0;
-
-  --accent-primary: #88C0D0;
-  --accent-gradient: linear-gradient(135deg, #5E81AC 0%, #88C0D0 100%);
-
-  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.35);
-  --shadow-hover: 0 10px 28px rgba(136, 192, 208, 0.2);
-}
-
-/* Apply Dark Contrast Rules for Non-Light Themes */
-[data-theme="dark"] body, [data-theme="vscode"] body, [data-theme="dracula"] body, [data-theme="nord"] body,
-[data-theme="dark"] h1, [data-theme="vscode"] h1, [data-theme="dracula"] h1, [data-theme="nord"] h1,
-[data-theme="dark"] h2, [data-theme="vscode"] h2, [data-theme="dracula"] h2, [data-theme="nord"] h2,
-[data-theme="dark"] h3, [data-theme="vscode"] h3, [data-theme="dracula"] h3, [data-theme="nord"] h3,
-[data-theme="dark"] h4, [data-theme="vscode"] h4, [data-theme="dracula"] h4, [data-theme="nord"] h4,
-[data-theme="dark"] p, [data-theme="vscode"] p, [data-theme="dracula"] p, [data-theme="nord"] p,
-[data-theme="dark"] span, [data-theme="vscode"] span, [data-theme="dracula"] span, [data-theme="nord"] span,
-[data-theme="dark"] label, [data-theme="vscode"] label, [data-theme="dracula"] label, [data-theme="nord"] label,
-[data-theme="dark"] div, [data-theme="vscode"] div, [data-theme="dracula"] div, [data-theme="nord"] div {
-  color: var(--text-primary);
-}
-
 /* Theme Selector Popover Styling */
 .theme-popover {
   position: absolute;
@@ -364,681 +364,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
-
-/* 1. Left Sidebar High Contrast */
-[data-theme="dark"] .sidebar-brand .brand-title h2 {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .sidebar-brand .brand-title span {
-  color: #A5B4FC !important;
-}
-[data-theme="dark"] .sidebar-section-title {
-  color: #A5B4FC !important;
-  font-weight: 800 !important;
-}
-[data-theme="dark"] .sidebar-nav-item {
-  color: #F4F4F5 !important;
-}
-[data-theme="dark"] .sidebar-nav-item:hover {
-  background: #27272A !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .sidebar-nav-item.active {
-  background: #312E81 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .nav-count-badge {
-  background: #27272A !important;
-  color: #FFFFFF !important;
-}
-
-/* Productivity Widget in Dark Mode */
-[data-theme="dark"] .sidebar-widget {
-  background: #18181B !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .sidebar-widget span,
-[data-theme="dark"] .sidebar-widget div {
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .user-info .user-name {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .user-info .user-role {
-  color: #D4D4D8 !important;
-}
-
-/* 2. Stat Cards High Contrast */
-[data-theme="dark"] .stat-card {
-  background: #121215 !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .stat-info .stat-label {
-  color: #E2E8F0 !important;
-  font-weight: 800 !important;
-}
-[data-theme="dark"] .stat-info .stat-value {
-  color: #FFFFFF !important;
-  font-weight: 900 !important;
-}
-
-/* 3. Top Navbar & Icon Buttons */
-[data-theme="dark"] .top-navbar {
-  background: #121215 !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .breadcrumb-path {
-  color: #A5B4FC !important;
-}
-[data-theme="dark"] .breadcrumb-current {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .navbar-icon-btn {
-  background: #18181B !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .navbar-icon-btn:hover {
-  background: #27272A !important;
-  border-color: #6366F1 !important;
-}
-[data-theme="dark"] .notification-dot {
-  border-color: #18181B !important;
-}
-
-/* Notifications Popover Dropdown */
-.notifications-dropdown {
-  position: absolute;
-  top: 125%;
-  right: 0;
-  width: 320px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  overflow: hidden;
-}
-
-[data-theme="dark"] .notifications-dropdown {
-  background: #121215 !important;
-  border-color: #27272A !important;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9) !important;
-}
-
-.dropdown-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--bg-sidebar);
-}
-
-[data-theme="dark"] .dropdown-header {
-  background: #18181B !important;
-  border-bottom-color: #27272A !important;
-}
-
-.dropdown-body {
-  max-height: 280px;
-  overflow-y: auto;
-  padding: 0.5rem;
-}
-
-.notification-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.notification-item:hover {
-  background: var(--bg-input);
-}
-
-[data-theme="dark"] .notification-item:hover {
-  background: #27272A !important;
-}
-
-.notification-item .item-icon {
-  margin-top: 0.15rem;
-  flex-shrink: 0;
-}
-
-.notification-item .item-title {
-  font-size: 0.825rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.35;
-}
-
-[data-theme="dark"] .notification-item .item-title {
-  color: #FFFFFF !important;
-}
-
-.notification-item .item-time {
-  font-size: 0.725rem;
-  color: var(--text-muted);
-  margin-top: 0.15rem;
-}
-
-[data-theme="dark"] .notification-item .item-time {
-  color: #A1A1AA !important;
-}
-
-/* Quote Banner Container */
-.quote-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.4rem;
-  transition: opacity 0.3s ease;
-}
-
-.quote-container.fade-in {
-  opacity: 1;
-}
-
-.quote-container.fade-out {
-  opacity: 0.15;
-}
-
-.quote-text {
-  font-size: 0.85rem;
-  font-style: italic;
-  opacity: 0.95;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.quote-author {
-  font-style: normal;
-  font-weight: 700;
-  margin-left: 0.35rem;
-  opacity: 0.9;
-}
-
-.quote-refresh-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: #FFFFFF;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.quote-refresh-btn:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: rotate(180deg);
-}
-
-/* Focus Session Pomodoro Widget */
-.focus-widget {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 1rem;
-}
-
-[data-theme="dark"] .focus-widget {
-  background: #121215 !important;
-  border-color: #27272A !important;
-}
-
-.focus-mode-tabs {
-  display: flex;
-  gap: 0.25rem;
-  background: var(--bg-input);
-  padding: 0.2rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 0.75rem;
-  width: 100%;
-}
-
-[data-theme="dark"] .focus-mode-tabs {
-  background: #000000 !important;
-}
-
-.focus-tab {
-  flex: 1;
-  padding: 0.35rem 0.2rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.focus-tab.active {
-  background: var(--bg-card);
-  color: var(--accent-primary);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-[data-theme="dark"] .focus-tab.active {
-  background: #27272A !important;
-  color: #FFFFFF !important;
-}
-
-.focus-timer-display {
-  text-align: center;
-  margin: 0.5rem 0;
-}
-
-.timer-text {
-  font-family: var(--font-mono);
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  line-height: 1;
-}
-
-[data-theme="dark"] .timer-text {
-  color: #FFFFFF !important;
-}
-
-/* Modern Task Selection Button */
-.focus-task-selector-btn {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-input);
-  border: 1px dashed var(--border-hover);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-  font-size: 0.775rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-}
-
-.focus-task-selector-btn:hover {
-  border-color: var(--accent-primary);
-  background: #EEF2FF;
-  color: var(--accent-primary);
-}
-
-[data-theme="dark"] .focus-task-selector-btn {
-  background: #000000 !important;
-  border-color: #3F3F46 !important;
-  color: #F4F4F5 !important;
-}
-
-[data-theme="dark"] .focus-task-selector-btn:hover {
-  background: #18181B !important;
-  border-color: #6366F1 !important;
-  color: #FFFFFF !important;
-}
-
-.focus-task-selector-btn.selected {
-  border: 1px solid var(--accent-primary);
-  background: #EEF2FF;
-  color: var(--accent-primary);
-  font-weight: 700;
-}
-
-[data-theme="dark"] .focus-task-selector-btn.selected {
-  background: #18181B !important;
-  border-color: #6366F1 !important;
-  color: #FFFFFF !important;
-}
-
-.selector-label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Task Picker Popover */
-.task-picker-popover {
-  position: absolute;
-  bottom: 110%;
-  left: 0;
-  right: 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  z-index: 500;
-  overflow: hidden;
-}
-
-[data-theme="dark"] .task-picker-popover {
-  background: #18181B !important;
-  border-color: #3F3F46 !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9) !important;
-}
-
-.picker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-sidebar);
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.725rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-[data-theme="dark"] .picker-header {
-  background: #09090B !important;
-  border-bottom-color: #27272A !important;
-}
-
-.btn-close-picker {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.picker-list {
-  max-height: 170px;
-  overflow-y: auto;
-  padding: 0.35rem;
-}
-
-.picker-empty {
-  padding: 0.75rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.picker-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.45rem 0.6rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  margin-bottom: 0.2rem;
-}
-
-.picker-item:hover {
-  background: var(--bg-input);
-}
-
-[data-theme="dark"] .picker-item:hover {
-  background: #27272A !important;
-}
-
-.picker-item.active {
-  background: #EEF2FF;
-}
-
-[data-theme="dark"] .picker-item.active {
-  background: #27272A !important;
-}
-
-.picker-item-title {
-  font-size: 0.775rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-[data-theme="dark"] .picker-item-title {
-  color: #FFFFFF !important;
-}
-
-/* 4. Modal Dialog Dark Mode Overrides */
-[data-theme="dark"] .modal-overlay {
-  background: rgba(0, 0, 0, 0.8) !important;
-  backdrop-filter: blur(8px) !important;
-}
-
-[data-theme="dark"] .modal-content {
-  background: #121215 !important;
-  border-color: #27272A !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95) !important;
-}
-
-[data-theme="dark"] .modal-header h2 {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="dark"] .form-group label {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="dark"] .form-control {
-  background: #000000 !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .form-control::placeholder {
-  color: #71717A !important;
-}
-
-[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1) !important;
-  cursor: pointer;
-}
-
-/* 5. Toolbar & Secondary Buttons */
-[data-theme="dark"] .toolbar-card {
-  background: #121215 !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .btn-secondary {
-  background: #18181B !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-  font-weight: 700 !important;
-}
-[data-theme="dark"] .btn-secondary:hover {
-  background: #27272A !important;
-  border-color: #6366F1 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .search-box input {
-  background: #000000 !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .search-box input::placeholder {
-  color: #A1A1AA !important;
-}
-[data-theme="dark"] .search-icon {
-  color: #A5B4FC !important;
-}
-[data-theme="dark"] .select-control {
-  background: #000000 !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .select-control option {
-  background: #121215 !important;
-  color: #FFFFFF !important;
-}
-
-/* 6. Category Chips */
-[data-theme="dark"] .chip {
-  background: #18181B !important;
-  border-color: #3F3F46 !important;
-  color: #F4F4F5 !important;
-}
-[data-theme="dark"] .chip.active {
-  background: #4F46E5 !important;
-  border-color: #6366F1 !important;
-  color: #FFFFFF !important;
-}
-
-/* 7. Task Cards High Contrast Dark Mode Overrides */
-[data-theme="dark"] .task-card {
-  background: #121215 !important;
-  border-color: #27272A !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
-}
-
-[data-theme="dark"] .task-card:hover {
-  border-color: #3F3F46 !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.95) !important;
-}
-
-[data-theme="dark"] .task-title {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-
-[data-theme="dark"] .task-desc {
-  color: #E4E4E7 !important;
-}
-
-[data-theme="dark"] .task-cat-badge {
-  background: #27272A !important;
-  border-color: #3F3F46 !important;
-  color: #F4F4F5 !important;
-}
-
-[data-theme="dark"] .due-badge {
-  color: #D4D4D8 !important;
-}
-
-[data-theme="dark"] .due-badge.overdue {
-  color: #F87171 !important;
-}
-
-/* Subtask progress numbers */
-[data-theme="dark"] .task-card span {
-  color: #F4F4F5 !important;
-}
-
-[data-theme="dark"] .subtask-label {
-  color: #E4E4E7 !important;
-}
-
-[data-theme="dark"] .subtask-icon {
-  color: #818CF8 !important;
-}
-
-[data-theme="dark"] .subtask-percent {
-  color: #A5B4FC !important;
-}
-
-[data-theme="dark"] .progress-bar-container {
-  background: #27272A !important;
-}
-
-/* View Details Button */
-[data-theme="dark"] .btn-outline-sm {
-  background: #27272A !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-  font-weight: 700 !important;
-}
-
-[data-theme="dark"] .btn-outline-sm:hover {
-  background: #4F46E5 !important;
-  border-color: #6366F1 !important;
-  color: #FFFFFF !important;
-}
-
-/* Priority Badges High Contrast Neon Glow */
-[data-theme="dark"] .prio-low {
-  background: rgba(16, 185, 129, 0.25) !important;
-  color: #6EE7B7 !important;
-  border-color: rgba(16, 185, 129, 0.5) !important;
-}
-[data-theme="dark"] .prio-medium {
-  background: rgba(59, 130, 246, 0.25) !important;
-  color: #93C5FD !important;
-  border-color: rgba(59, 130, 246, 0.5) !important;
-}
-[data-theme="dark"] .prio-high {
-  background: rgba(245, 158, 11, 0.25) !important;
-  color: #FDE047 !important;
-  border-color: rgba(245, 158, 11, 0.5) !important;
-}
-[data-theme="dark"] .prio-urgent {
-  background: rgba(239, 68, 68, 0.25) !important;
-  color: #FCA5A5 !important;
-  border-color: rgba(239, 68, 68, 0.5) !important;
-}
-
-/* 8. Right Sidebar Panel High Contrast */
-[data-theme="dark"] .right-panel {
-  background: #09090B !important;
-  border-left-color: #27272A !important;
-}
-[data-theme="dark"] .panel-widget {
-  background: #121215 !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .widget-header h3 {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-[data-theme="dark"] .upcoming-item {
-  background: #18181B !important;
-  border-color: #27272A !important;
-}
-[data-theme="dark"] .upcoming-title {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .upcoming-date {
-  color: #D4D4D8 !important;
-}
-[data-theme="dark"] .activity-text {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .activity-time {
-  color: #A1A1AA !important;
-}
-
-/* Detail View Card Dark Overrides */
-[data-theme="dark"] .editable-title {
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .editable-desc {
-  background: #000000 !important;
-  border-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .subtask-item {
-  background: #18181B !important;
-  border-color: #27272A !important;
-  color: #FFFFFF !important;
-}
-[data-theme="dark"] .detail-card {
-  background: #121215 !important;
-  border-color: #27272A !important;
-  color: #FFFFFF !important;
 }
 
 * {
@@ -1149,13 +474,14 @@ button, input, select, textarea {
 }
 
 .sidebar-nav-item:hover {
-  background: #F1F5F9;
+  background: var(--bg-input);
   color: var(--text-primary);
 }
 
 .sidebar-nav-item.active {
-  background: #EEF2FF;
+  background: var(--bg-card);
   color: var(--accent-primary);
+  border-left: 3px solid var(--accent-primary);
 }
 
 .nav-count-badge {
@@ -1164,7 +490,7 @@ button, input, select, textarea {
   font-weight: 800;
   padding: 0.15rem 0.55rem;
   border-radius: 12px;
-  background: #E2E8F0;
+  background: var(--bg-input);
   color: var(--text-secondary);
 }
 
@@ -1181,7 +507,7 @@ button, input, select, textarea {
 .sidebar-widget {
   margin: auto 1rem 1rem 1rem;
   padding: 1rem;
-  background: #F8FAFC;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
 }
@@ -1197,7 +523,7 @@ button, input, select, textarea {
 .user-avatar {
   width: 36px;
   height: 36px;
-  background: #EEF2FF;
+  background: var(--bg-input);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1225,7 +551,7 @@ button, input, select, textarea {
 /* 3. Right Sidebar Panel */
 .right-panel {
   width: 300px;
-  background: #FFFFFF;
+  background: var(--bg-sidebar);
   border-left: 1px solid var(--border-color);
   padding: 1.5rem;
   position: sticky;
@@ -1240,7 +566,7 @@ button, input, select, textarea {
 }
 
 .panel-widget {
-  background: #F8FAFC;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.15rem;
@@ -1266,7 +592,7 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   padding: 0.65rem 0.75rem;
-  background: #FFFFFF;
+  background: var(--bg-card-hover);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   margin-bottom: 0.5rem;
@@ -1332,7 +658,7 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   padding: 0.85rem 1.25rem;
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   margin-bottom: 1.5rem;
@@ -1375,7 +701,7 @@ button, input, select, textarea {
   height: 38px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  background: #FFFFFF;
+  background: var(--bg-input);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1397,7 +723,290 @@ button, input, select, textarea {
   height: 8px;
   background: #EF4444;
   border-radius: 50%;
-  border: 2px solid #FFFFFF;
+  border: 2px solid var(--bg-card);
+}
+
+/* Notifications Popover Dropdown */
+.notifications-dropdown {
+  position: absolute;
+  top: 125%;
+  right: 0;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
+}
+
+.dropdown-body {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: var(--bg-input);
+}
+
+.notification-item .item-icon {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.notification-item .item-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.notification-item .item-time {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* Quote Banner Container */
+.quote-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  transition: opacity 0.3s ease;
+}
+
+.quote-container.fade-in {
+  opacity: 1;
+}
+
+.quote-container.fade-out {
+  opacity: 0.15;
+}
+
+.quote-text {
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quote-author {
+  font-style: normal;
+  font-weight: 700;
+  margin-left: 0.35rem;
+  opacity: 0.9;
+}
+
+.quote-refresh-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.quote-refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(180deg);
+}
+
+/* Focus Session Pomodoro Widget */
+.focus-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.focus-mode-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-input);
+  padding: 0.2rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.focus-tab {
+  flex: 1;
+  padding: 0.35rem 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.focus-tab.active {
+  background: var(--bg-card);
+  color: var(--accent-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.focus-timer-display {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.timer-text {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* Modern Task Selection Button */
+.focus-task-selector-btn {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-input);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.775rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.focus-task-selector-btn:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-card-hover);
+  color: var(--accent-primary);
+}
+
+.focus-task-selector-btn.selected {
+  border: 1px solid var(--accent-primary);
+  background: var(--bg-card-hover);
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.selector-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Task Picker Popover */
+.task-picker-popover {
+  position: absolute;
+  bottom: 110%;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-modal);
+  z-index: 500;
+  overflow: hidden;
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.725rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.btn-close-picker {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.picker-list {
+  max-height: 170px;
+  overflow-y: auto;
+  padding: 0.35rem;
+}
+
+.picker-empty {
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 0.2rem;
+}
+
+.picker-item:hover {
+  background: var(--bg-input);
+}
+
+.picker-item.active {
+  background: var(--bg-card-hover);
+}
+
+.picker-item-title {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Welcome Banner */
@@ -1418,12 +1027,14 @@ button, input, select, textarea {
   font-size: 1.45rem;
   font-weight: 800;
   line-height: 1.25;
+  color: #FFFFFF !important;
 }
 
 .welcome-banner p {
   font-size: 0.875rem;
-  opacity: 0.9;
+  opacity: 0.95;
   margin-top: 0.35rem;
+  color: #FFFFFF !important;
 }
 
 .welcome-banner .btn-primary {
@@ -1453,7 +1064,7 @@ button, input, select, textarea {
 
 .btn-primary {
   background: var(--accent-gradient);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28);
 }
 
@@ -1463,14 +1074,14 @@ button, input, select, textarea {
 }
 
 .btn-secondary {
-  background: #FFFFFF;
+  background: var(--bg-card);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .btn-secondary:hover {
-  background: #F8FAFC;
+  background: var(--bg-card-hover);
   border-color: var(--border-hover);
 }
 
@@ -1479,7 +1090,7 @@ button, input, select, textarea {
   font-size: 0.775rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  background: #F8FAFC;
+  background: var(--bg-input);
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
   display: inline-flex;
@@ -1489,7 +1100,7 @@ button, input, select, textarea {
 }
 
 .btn-outline-sm:hover {
-  background: #EEF2FF;
+  background: var(--bg-card-hover);
   color: var(--accent-primary);
   border-color: var(--border-accent);
 }
@@ -1505,7 +1116,7 @@ button, input, select, textarea {
 .btn-icon-danger {
   background: transparent;
   border: none;
-  color: #94A3B8;
+  color: var(--text-muted);
   padding: 0.35rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -1656,6 +1267,11 @@ button, input, select, textarea {
   transition: all 0.2s ease;
 }
 
+.select-control option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
 .select-control:focus {
   border-color: var(--accent-primary);
 }
@@ -1672,7 +1288,7 @@ button, input, select, textarea {
 .chip {
   padding: 0.4rem 0.95rem;
   border-radius: 20px;
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   font-size: 0.8rem;
   font-weight: 600;
@@ -1683,10 +1299,15 @@ button, input, select, textarea {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.chip:hover, .chip.active {
-  background: #EEF2FF;
+.chip:hover {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.chip.active {
+  background: var(--accent-primary);
   border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  color: #FFFFFF !important;
 }
 
 /* Task Cards Grid Layout & Styling */
@@ -1717,6 +1338,7 @@ button, input, select, textarea {
 
 .task-card:hover {
   transform: translateY(-4px);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow-hover);
 }
 
@@ -1830,9 +1452,9 @@ button, input, select, textarea {
   border-radius: 6px;
   font-size: 0.725rem;
   font-weight: 600;
-  background: #F1F5F9;
+  background: var(--bg-input);
   color: var(--text-secondary);
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--border-color);
 }
 
 .due-badge {
@@ -1860,7 +1482,7 @@ button, input, select, textarea {
 
 .progress-bar-container {
   width: 100%;
-  background: #E2E8F0;
+  background: var(--bg-input);
   height: 6px;
   border-radius: 3px;
   overflow: hidden;
@@ -1877,12 +1499,12 @@ button, input, select, textarea {
   appearance: none;
   width: 22px;
   height: 22px;
-  border: 2px solid #CBD5E1;
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   outline: none;
   cursor: pointer;
   position: relative;
-  background: #FFFFFF;
+  background: var(--bg-input);
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
@@ -1910,8 +1532,8 @@ button, input, select, textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(5px);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1920,7 +1542,7 @@ button, input, select, textarea {
 }
 
 .modal-content {
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   padding: 2.25rem;
@@ -2034,7 +1656,7 @@ button, input, select, textarea {
 .editable-desc {
   width: 100%;
   min-height: 125px;
-  background: #F8FAFC;
+  background: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1rem;
@@ -2054,7 +1676,7 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: #F8FAFC;
+  background: var(--bg-input);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   margin-bottom: 0.5rem;

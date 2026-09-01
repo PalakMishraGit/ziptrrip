@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { X, Plus, Trash2, Calendar } from 'lucide-react';
 
 export function QuickAddModal({ isOpen, onClose, onCreate }) {
+  const getTodayString = () => new Date().toISOString().split('T')[0];
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('General');
   const [priority, setPriority] = useState('medium');
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState(getTodayString());
   const [subtaskInput, setSubtaskInput] = useState('');
   const [subtasks, setSubtasks] = useState([]);
 
@@ -34,7 +36,7 @@ export function QuickAddModal({ isOpen, onClose, onCreate }) {
       category: category || 'General',
       priority,
       status: 'pending',
-      dueDate: dueDate ? new Date(dueDate).toISOString() : null,
+      dueDate: dueDate ? new Date(dueDate).toISOString() : new Date().toISOString(),
       subtasks
     });
 
@@ -43,7 +45,7 @@ export function QuickAddModal({ isOpen, onClose, onCreate }) {
     setDescription('');
     setCategory('General');
     setPriority('medium');
-    setDueDate('');
+    setDueDate(getTodayString());
     setSubtasks([]);
     onClose();
   };

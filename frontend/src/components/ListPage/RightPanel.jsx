@@ -2,13 +2,17 @@ import React from 'react';
 import { Clock, History, PieChart, ArrowUpRight, CheckCircle2, Calendar, Tag } from 'lucide-react';
 
 export function RightPanel({ todos = [], stats = { categories: [] } }) {
-  // Extract upcoming tasks with due dates
+  // Extract upcoming active tasks dynamically sorted by target/due date
   const upcomingTasks = todos
-    .filter(t => t.dueDate && t.status !== 'completed')
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
-    .slice(0, 3);
+    .filter(t => t.status !== 'completed')
+    .map(t => ({
+      ...t,
+      effectiveDate: t.dueDate ? new Date(t.dueDate) : new Date(t.createdAt)
+    }))
+    .sort((a, b) => a.effectiveDate - b.effectiveDate)
+    .slice(0, 4);
 
-  // Recent activity logs compiled from tasks
+  // Recent activity logs compiled dynamically from task audit logs
   const recentLogs = todos
     .flatMap(t => (t.logs || []).map(l => ({ ...l, taskTitle: t.title })))
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -63,14 +67,14 @@ export function RightPanel({ todos = [], stats = { categories: [] } }) {
                 <div style={{ flex: 1 }}>
                   <div className="upcoming-title">{t.title}</div>
                   <div className="upcoming-date">
-                    <Clock size={12} /> {new Date(t.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                    <Clock size={12} /> {t.effectiveDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                   </div>
                 </div>
                 <ArrowUpRight size={14} color="var(--text-muted)" />
               </a>
             ))
           ) : (
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No upcoming task deadlines.</p>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No active upcoming deadlines.</p>
           )}
         </div>
       </div>

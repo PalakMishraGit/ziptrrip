@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock } from 'lucide-react';
+import { Calendar, ExternalLink, Trash2, ListChecks, Tag, Clock, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export function TaskCard({ task, onToggleStatus, onDelete }) {
   const isCompleted = task.status === 'completed';
@@ -23,9 +23,9 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
 
   return (
     <div className={`task-card prio-stripe-${task.priority} ${isCompleted ? 'completed' : ''}`}>
-      <div>
+      <div className="task-card-inner-top">
         <div className="task-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+          <div className="task-header-left">
             <input 
               type="checkbox" 
               className="custom-checkbox" 
@@ -34,6 +34,7 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
               title={isCompleted ? 'Mark as pending' : 'Mark as completed'}
             />
             <span className={`prio-badge ${priorityClass}`}>
+              {task.priority === 'urgent' && <AlertCircle size={10} style={{ marginRight: '3px' }} />}
               {task.priority}
             </span>
             {task.category && (
@@ -56,7 +57,7 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
           </button>
         </div>
 
-        <a href={`todo.html?id=${task.id}`} className="task-title" style={{ display: 'block', marginTop: '0.4rem' }}>
+        <a href={`todo.html?id=${task.id}`} className="task-title">
           {task.title}
         </a>
 
@@ -65,15 +66,15 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
         )}
       </div>
 
-      <div>
+      <div className="task-card-inner-bottom">
         {task.totalSubtasks > 0 && (
-          <div style={{ marginTop: '0.85rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.775rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <ListChecks size={13} color="var(--accent-primary)" /> 
+          <div className="task-subtask-wrapper">
+            <div className="subtask-header-info">
+              <span className="subtask-label">
+                <ListChecks size={13} className="subtask-icon" /> 
                 {task.completedSubtasks}/{task.totalSubtasks} Subtasks
               </span>
-              <span>{subtaskProgress}%</span>
+              <span className="subtask-percent">{subtaskProgress}%</span>
             </div>
             <div className="progress-bar-container">
               <div className="progress-bar-fill" style={{ width: `${subtaskProgress}%` }}></div>
@@ -87,8 +88,8 @@ export function TaskCard({ task, onToggleStatus, onDelete }) {
             <span>{formattedDueDate} {isOverdue && '(Overdue)'}</span>
           </div>
 
-          <a href={`todo.html?id=${task.id}`} className="btn btn-outline-sm">
-            View Details <ExternalLink size={12} />
+          <a href={`todo.html?id=${task.id}`} className="btn btn-outline-sm btn-details-link">
+            View Details <ArrowRight size={13} className="details-arrow" />
           </a>
         </div>
       </div>

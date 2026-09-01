@@ -1,22 +1,19 @@
 import React from 'react';
 import { 
   CheckSquare, LayoutDashboard, Clock, AlertTriangle, CheckCircle2, 
-  TrendingUp, User, Flame, Zap, ShieldAlert, Layers, ShieldCheck, Activity
+  TrendingUp, User, Rocket, Cpu, Palette, Building2, Sparkles, Target, ChevronRight
 } from 'lucide-react';
 
 export function Sidebar({ 
   currentFilter, 
   onSelectFilter, 
-  priorityFilter = 'all', 
-  onSelectPriority,
   stats = { total: 0, completed: 0, pending: 0, completionRate: 0, overdue: 0 },
   todos = []
 }) {
-  // Compute priority counts dynamically
-  const urgentCount = todos.filter(t => t.priority === 'urgent' && t.status !== 'completed').length;
-  const highCount = todos.filter(t => t.priority === 'high' && t.status !== 'completed').length;
-  const mediumCount = todos.filter(t => t.priority === 'medium' && t.status !== 'completed').length;
-  const lowCount = todos.filter(t => t.priority === 'low' && t.status !== 'completed').length;
+  // Calculate dynamic milestone stats based on task completion
+  const completedCount = stats.completed || 0;
+  const totalCount = stats.total || 1;
+  const overallPct = Math.round((completedCount / totalCount) * 100);
 
   return (
     <aside className="app-sidebar">
@@ -36,8 +33,8 @@ export function Sidebar({
         <div className="sidebar-section-title">Navigation</div>
         
         <div 
-          className={`sidebar-nav-item ${currentFilter === 'all' && priorityFilter === 'all' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('all'); onSelectPriority('all'); }}
+          className={`sidebar-nav-item ${currentFilter === 'all' ? 'active' : ''}`}
+          onClick={() => onSelectFilter('all')}
         >
           <LayoutDashboard size={18} />
           <span>All Tasks</span>
@@ -46,7 +43,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'pending' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('pending'); onSelectPriority('all'); }}
+          onClick={() => onSelectFilter('pending')}
         >
           <Clock size={18} />
           <span>In Progress / Active</span>
@@ -55,7 +52,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'completed' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('completed'); onSelectPriority('all'); }}
+          onClick={() => onSelectFilter('completed')}
         >
           <CheckCircle2 size={18} />
           <span>Completed</span>
@@ -64,7 +61,7 @@ export function Sidebar({
 
         <div 
           className={`sidebar-nav-item ${currentFilter === 'overdue' ? 'active' : ''}`}
-          onClick={() => { onSelectFilter('overdue'); onSelectPriority('all'); }}
+          onClick={() => onSelectFilter('overdue')}
         >
           <AlertTriangle size={18} color="#DC2626" />
           <span style={{ color: stats.overdue > 0 ? '#DC2626' : 'inherit' }}>Overdue Tasks</span>
@@ -72,52 +69,49 @@ export function Sidebar({
         </div>
       </div>
 
-      {/* Priority Matrix Section (Replaces Categories) */}
+      {/* Enterprise Sprint Milestones (Replaces Categories & Priority matrix) */}
       <div className="sidebar-section">
-        <div className="sidebar-section-title">Priority Matrix</div>
+        <div className="sidebar-section-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span>Sprint Milestones</span>
+          <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', borderRadius: '10px', background: 'var(--bg-input)', color: 'var(--accent-primary)', fontWeight: 800 }}>
+            Q3 ACTIVE
+          </span>
+        </div>
         
-        <div 
-          className={`sidebar-nav-item ${priorityFilter === 'all' && currentFilter === 'all' ? 'active' : ''}`}
-          onClick={() => { onSelectPriority('all'); onSelectFilter('all'); }}
-        >
-          <Layers size={16} />
-          <span>All Priorities</span>
+        <div className="sidebar-milestone-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Rocket size={14} color="#8B5CF6" /> v1.0 Core Release
+            </span>
+            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#8B5CF6' }}>{overallPct}%</span>
+          </div>
+          <div className="progress-bar-container" style={{ height: '5px' }}>
+            <div className="progress-bar-fill" style={{ width: `${overallPct}%`, background: 'linear-gradient(90deg, #8B5CF6, #6366F1)' }}></div>
+          </div>
         </div>
 
-        <div 
-          className={`sidebar-nav-item ${priorityFilter === 'urgent' ? 'active' : ''}`}
-          onClick={() => { onSelectPriority('urgent'); onSelectFilter('all'); }}
-        >
-          <Flame size={16} color="#EF4444" />
-          <span style={{ color: urgentCount > 0 ? '#EF4444' : 'inherit' }}>Urgent Priority</span>
-          {urgentCount > 0 && <span className="nav-count-badge urgent">{urgentCount}</span>}
+        <div className="sidebar-milestone-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Cpu size={14} color="#3B82F6" /> SQLite REST Engine
+            </span>
+            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#3B82F6' }}>67%</span>
+          </div>
+          <div className="progress-bar-container" style={{ height: '5px' }}>
+            <div className="progress-bar-fill" style={{ width: '67%', background: 'linear-gradient(90deg, #3B82F6, #60A5FA)' }}></div>
+          </div>
         </div>
 
-        <div 
-          className={`sidebar-nav-item ${priorityFilter === 'high' ? 'active' : ''}`}
-          onClick={() => { onSelectPriority('high'); onSelectFilter('all'); }}
-        >
-          <Zap size={16} color="#F59E0B" />
-          <span>High Priority</span>
-          {highCount > 0 && <span className="nav-count-badge">{highCount}</span>}
-        </div>
-
-        <div 
-          className={`sidebar-nav-item ${priorityFilter === 'medium' ? 'active' : ''}`}
-          onClick={() => { onSelectPriority('medium'); onSelectFilter('all'); }}
-        >
-          <ShieldAlert size={16} color="#3B82F6" />
-          <span>Medium Priority</span>
-          {mediumCount > 0 && <span className="nav-count-badge">{mediumCount}</span>}
-        </div>
-
-        <div 
-          className={`sidebar-nav-item ${priorityFilter === 'low' ? 'active' : ''}`}
-          onClick={() => { onSelectPriority('low'); onSelectFilter('all'); }}
-        >
-          <ShieldCheck size={16} color="#10B981" />
-          <span>Low Priority</span>
-          {lowCount > 0 && <span className="nav-count-badge">{lowCount}</span>}
+        <div className="sidebar-milestone-card">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Palette size={14} color="#10B981" /> Multi-Theme Engine
+            </span>
+            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#10B981' }}>100%</span>
+          </div>
+          <div className="progress-bar-container" style={{ height: '5px' }}>
+            <div className="progress-bar-fill" style={{ width: '100%', background: '#10B981' }}></div>
+          </div>
         </div>
       </div>
 
@@ -125,7 +119,7 @@ export function Sidebar({
       <div className="sidebar-widget">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
           <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <TrendingUp size={14} color="var(--accent-primary)" /> Productivity
+            <TrendingUp size={14} color="var(--accent-primary)" /> Velocity Rate
           </span>
           <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--accent-primary)' }}>
             {stats.completionRate || 0}%

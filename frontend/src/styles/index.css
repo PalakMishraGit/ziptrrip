@@ -512,6 +512,21 @@ button, input, select, textarea {
   border-radius: var(--radius-lg);
 }
 
+.sidebar-milestone-card {
+  padding: 0.65rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-milestone-card:hover {
+  border-color: var(--border-accent);
+  transform: translateX(2px);
+  background: var(--bg-card-hover);
+}
+
 .sidebar-user-footer {
   padding: 1rem 1.25rem 0 1.25rem;
   border-top: 1px solid var(--border-color);

@@ -55,25 +55,25 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Dark Theme Overrides */
+/* Pure OLED Dark Black Theme Overrides (Linear / Vercel Minimalist Style) */
 [data-theme="dark"] {
-  --bg-main: #0B0F19;
-  --bg-sidebar: #0F172A;
-  --bg-card: #1E293B;
-  --bg-card-hover: #334155;
-  --bg-input: #0F172A;
+  --bg-main: #000000;
+  --bg-sidebar: #09090B;
+  --bg-card: #121215;
+  --bg-card-hover: #18181B;
+  --bg-input: #000000;
 
-  --border-color: rgba(255, 255, 255, 0.12);
-  --border-hover: rgba(255, 255, 255, 0.25);
+  --border-color: #27272A;
+  --border-hover: #3F3F46;
   --border-accent: #6366F1;
 
   --text-primary: #FFFFFF;
-  --text-secondary: #E2E8F0;
-  --text-muted: #94A3B8;
+  --text-secondary: #E4E4E7;
+  --text-muted: #A1A1AA;
   --text-bright-accent: #818CF8;
 
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.7);
+  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.9);
 }
 
 [data-theme="dark"] .top-navbar,
@@ -86,32 +86,32 @@
 [data-theme="dark"] .btn-secondary,
 [data-theme="dark"] .navbar-icon-btn,
 [data-theme="dark"] .sidebar-widget {
-  background: #1E293B;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: #121215;
+  border-color: #27272A;
 }
 
 [data-theme="dark"] .search-box input,
 [data-theme="dark"] .select-control,
 [data-theme="dark"] .form-control,
 [data-theme="dark"] .editable-desc {
-  background: #0F172A;
-  border-color: rgba(255, 255, 255, 0.15);
+  background: #000000;
+  border-color: #27272A;
   color: #FFFFFF;
 }
 
 [data-theme="dark"] .task-cat-badge {
-  background: #0F172A;
-  border-color: rgba(255, 255, 255, 0.15);
-  color: #E2E8F0;
+  background: #18181B;
+  border-color: #27272A;
+  color: #E4E4E7;
 }
 
 [data-theme="dark"] .sidebar-nav-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #18181B;
 }
 
 [data-theme="dark"] .sidebar-nav-item.active {
-  background: rgba(99, 102, 241, 0.2);
-  color: #818CF8;
+  background: #27272A;
+  color: #FFFFFF;
 }
 
 * {

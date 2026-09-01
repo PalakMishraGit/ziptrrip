@@ -55,225 +55,251 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Pure OLED Dark Black Theme Overrides with High-Contrast Text */
+/* Pure OLED Dark Black Theme Overrides with Maximum Contrast & Brightness */
 [data-theme="dark"] {
-  --bg-main: #09090B;
-  --bg-sidebar: #121215;
-  --bg-card: #18181B;
-  --bg-card-hover: #27272A;
-  --bg-input: #09090B;
+  --bg-main: #000000;
+  --bg-sidebar: #09090B;
+  --bg-card: #121215;
+  --bg-card-hover: #18181B;
+  --bg-input: #000000;
 
   --border-color: #27272A;
   --border-hover: #3F3F46;
   --border-accent: #6366F1;
 
   --text-primary: #FFFFFF;
-  --text-secondary: #E4E4E7;
-  --text-muted: #A1A1AA;
+  --text-secondary: #F4F4F5;
+  --text-muted: #D4D4D8;
   --text-bright-accent: #A5B4FC;
 
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.7);
   --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.9);
 }
 
-/* Dark Mode Component Contrast Enhancements */
-[data-theme="dark"] .top-navbar,
-[data-theme="dark"] .right-panel,
-[data-theme="dark"] .panel-widget,
-[data-theme="dark"] .chip,
-[data-theme="dark"] .modal-content,
-[data-theme="dark"] .upcoming-item,
-[data-theme="dark"] .subtask-item,
-[data-theme="dark"] .btn-secondary,
-[data-theme="dark"] .navbar-icon-btn,
-[data-theme="dark"] .sidebar-widget {
-  background: #121215;
-  border-color: #27272A;
-}
-
-/* Task Cards Dark Mode */
-[data-theme="dark"] .task-card {
-  background: #18181B;
-  border-color: #27272A;
-}
-
-[data-theme="dark"] .task-title {
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .task-desc {
-  color: #D4D4D8 !important;
-}
-
-/* Stat Cards Dark Mode */
-[data-theme="dark"] .stat-card {
-  background: #18181B;
-  border-color: #27272A;
-}
-
-[data-theme="dark"] .stat-info .stat-label {
-  color: #A1A1AA !important;
-}
-
-[data-theme="dark"] .stat-info .stat-value {
-  color: #FFFFFF !important;
-}
-
-/* Toolbar & Form Controls Dark Mode */
-[data-theme="dark"] .toolbar-card {
-  background: #18181B;
-  border-color: #27272A;
-}
-
-[data-theme="dark"] .search-box input,
-[data-theme="dark"] .select-control,
-[data-theme="dark"] .form-control,
-[data-theme="dark"] .editable-desc {
-  background: #09090B;
-  border-color: #27272A;
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .search-box input::placeholder {
-  color: #71717A !important;
-}
-
-[data-theme="dark"] .select-control option {
-  background: #18181B;
+/* Force Ultra-Bright Text on All Dark Mode Containers */
+[data-theme="dark"] body,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] label,
+[data-theme="dark"] div {
   color: #FFFFFF;
 }
 
-/* Category Chips Dark Mode */
-[data-theme="dark"] .chip {
-  background: #18181B;
-  border-color: #27272A;
-  color: #E4E4E7 !important;
+/* 1. Left Sidebar High Contrast */
+[data-theme="dark"] .sidebar-brand .brand-title h2 {
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .sidebar-brand .brand-title span {
+  color: #A5B4FC !important;
+}
+[data-theme="dark"] .sidebar-section-title {
+  color: #A5B4FC !important; /* Vivid Ice Indigo */
+  font-weight: 800 !important;
+}
+[data-theme="dark"] .sidebar-nav-item {
+  color: #F4F4F5 !important;
+}
+[data-theme="dark"] .sidebar-nav-item:hover {
+  background: #27272A !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .sidebar-nav-item.active {
+  background: #312E81 !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .nav-count-badge {
+  background: #27272A !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .user-info .user-name {
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .user-info .user-role {
+  color: #D4D4D8 !important;
 }
 
-[data-theme="dark"] .chip.active {
-  background: #4F46E5;
-  border-color: #6366F1;
+/* 2. Stat Cards High Contrast */
+[data-theme="dark"] .stat-card {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .stat-info .stat-label {
+  color: #E2E8F0 !important; /* Ultra-bright slate */
+  font-weight: 800 !important;
+}
+[data-theme="dark"] .stat-info .stat-value {
+  color: #FFFFFF !important;
+  font-weight: 900 !important;
+}
+
+/* 3. Top Navbar & Breadcrumbs High Contrast */
+[data-theme="dark"] .top-navbar {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .breadcrumb-path {
+  color: #A5B4FC !important;
+}
+[data-theme="dark"] .breadcrumb-current {
   color: #FFFFFF !important;
 }
 
-/* Task Card Buttons & Badges Dark Mode */
-[data-theme="dark"] .btn-outline-sm {
-  background: #27272A;
-  border-color: #3F3F46;
+/* 4. Toolbar & Search Controls */
+[data-theme="dark"] .toolbar-card {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .search-box input {
+  background: #000000 !important;
+  border-color: #3F3F46 !important;
   color: #FFFFFF !important;
 }
-
-[data-theme="dark"] .btn-outline-sm:hover {
-  background: #4F46E5;
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .task-cat-badge {
-  background: #27272A;
-  border-color: #3F3F46;
-  color: #E4E4E7 !important;
-}
-
-[data-theme="dark"] .due-badge {
+[data-theme="dark"] .search-box input::placeholder {
   color: #A1A1AA !important;
 }
+[data-theme="dark"] .search-icon {
+  color: #A5B4FC !important;
+}
+[data-theme="dark"] .select-control {
+  background: #000000 !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+[data-theme="dark"] .select-control option {
+  background: #121215 !important;
+  color: #FFFFFF !important;
+}
 
+/* 5. Category Chips */
+[data-theme="dark"] .chip {
+  background: #18181B !important;
+  border-color: #3F3F46 !important;
+  color: #F4F4F5 !important;
+}
+[data-theme="dark"] .chip.active {
+  background: #4F46E5 !important;
+  border-color: #6366F1 !important;
+  color: #FFFFFF !important;
+}
+
+/* 6. Task Cards High Contrast */
+[data-theme="dark"] .task-card {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .task-title {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+[data-theme="dark"] .task-desc {
+  color: #E4E4E7 !important;
+}
+[data-theme="dark"] .task-cat-badge {
+  background: #27272A !important;
+  border-color: #3F3F46 !important;
+  color: #F4F4F5 !important;
+}
+[data-theme="dark"] .due-badge {
+  color: #D4D4D8 !important;
+}
 [data-theme="dark"] .due-badge.overdue {
   color: #F87171 !important;
 }
 
+/* Subtask progress numbers */
+[data-theme="dark"] .task-card span {
+  color: #F4F4F5 !important;
+}
 [data-theme="dark"] .progress-bar-container {
-  background: #27272A;
+  background: #27272A !important;
 }
 
-[data-theme="dark"] .task-footer {
-  border-top-color: #27272A;
+/* View Details Button */
+[data-theme="dark"] .btn-outline-sm {
+  background: #27272A !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
 }
-
-/* Priority Badges Dark Mode High Contrast */
-[data-theme="dark"] .prio-low {
-  background: rgba(16, 185, 129, 0.2);
-  color: #34D399 !important;
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-[data-theme="dark"] .prio-medium {
-  background: rgba(59, 130, 246, 0.2);
-  color: #60A5FA !important;
-  border-color: rgba(59, 130, 246, 0.4);
-}
-
-[data-theme="dark"] .prio-high {
-  background: rgba(245, 158, 11, 0.2);
-  color: #FBBF24 !important;
-  border-color: rgba(245, 158, 11, 0.4);
-}
-
-[data-theme="dark"] .prio-urgent {
-  background: rgba(239, 68, 68, 0.2);
-  color: #F87171 !important;
-  border-color: rgba(239, 68, 68, 0.4);
-}
-
-/* Widgets & Sidebar Navigation Dark Mode */
-[data-theme="dark"] .widget-header h3 {
+[data-theme="dark"] .btn-outline-sm:hover {
+  background: #4F46E5 !important;
+  border-color: #6366F1 !important;
   color: #FFFFFF !important;
 }
 
-[data-theme="dark"] .upcoming-item {
-  background: #18181B;
-  border-color: #27272A;
+/* Priority Badges High Contrast Neon Glow */
+[data-theme="dark"] .prio-low {
+  background: rgba(16, 185, 129, 0.25) !important;
+  color: #6EE7B7 !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+[data-theme="dark"] .prio-medium {
+  background: rgba(59, 130, 246, 0.25) !important;
+  color: #93C5FD !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+}
+[data-theme="dark"] .prio-high {
+  background: rgba(245, 158, 11, 0.25) !important;
+  color: #FDE047 !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+[data-theme="dark"] .prio-urgent {
+  background: rgba(239, 68, 68, 0.25) !important;
+  color: #FCA5A5 !important;
+  border-color: rgba(239, 68, 68, 0.5) !important;
 }
 
+/* 7. Right Sidebar Panel High Contrast */
+[data-theme="dark"] .right-panel {
+  background: #09090B !important;
+  border-left-color: #27272A !important;
+}
+[data-theme="dark"] .panel-widget {
+  background: #121215 !important;
+  border-color: #27272A !important;
+}
+[data-theme="dark"] .widget-header h3 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+[data-theme="dark"] .upcoming-item {
+  background: #18181B !important;
+  border-color: #27272A !important;
+}
 [data-theme="dark"] .upcoming-title {
   color: #FFFFFF !important;
 }
-
 [data-theme="dark"] .upcoming-date {
-  color: #A1A1AA !important;
+  color: #D4D4D8 !important;
 }
-
 [data-theme="dark"] .activity-text {
-  color: #E4E4E7 !important;
+  color: #FFFFFF !important;
 }
-
 [data-theme="dark"] .activity-time {
   color: #A1A1AA !important;
 }
 
-[data-theme="dark"] .sidebar-nav-item {
-  color: #E4E4E7 !important;
-}
-
-[data-theme="dark"] .sidebar-nav-item:hover {
-  background: #18181B;
-  color: #FFFFFF !important;
-}
-
-[data-theme="dark"] .sidebar-nav-item.active {
-  background: #27272A;
-  color: #818CF8 !important;
-}
-
+/* Detail View Card Dark Overrides */
 [data-theme="dark"] .editable-title {
   color: #FFFFFF !important;
 }
-
 [data-theme="dark"] .editable-desc {
-  background: #09090B;
-  border-color: #27272A;
+  background: #000000 !important;
+  border-color: #3F3F46 !important;
   color: #FFFFFF !important;
 }
-
 [data-theme="dark"] .subtask-item {
-  background: #18181B;
-  border-color: #27272A;
+  background: #18181B !important;
+  border-color: #27272A !important;
   color: #FFFFFF !important;
 }
-
 [data-theme="dark"] .detail-card {
-  background: #121215;
-  border-color: #27272A;
+  background: #121215 !important;
+  border-color: #27272A !important;
   color: #FFFFFF !important;
 }
 
